@@ -21,6 +21,9 @@ public final class Constants {
 	// 用户角色主键ID
 	public static final String SESSION_LOGIN_ROLE_ID = "_SESSION_LOGIN_ROLE_ID";
 	
+	// 普通用户角色主键ID
+	public static final String CommonRoleId = "12412fsdfsf323sddddfsf534";
+	
 	// 用户角色名称
 	public static final String SESSION_LOGIN_ROLE = "_SESSION_LOGIN_ROLE";
 

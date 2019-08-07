@@ -116,4 +116,8 @@ public class QaUser implements Serializable {
 	@Transient
 	private String code;
 	
+	// 角色ID
+	@Transient
+	private String roleId;
+	
 }
