@@ -11,13 +11,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.solr.domain.SolrCompany;
-
 import lombok.Data;
 
 @Data
 @Entity
-public class PageResult implements Serializable {
+public class PageResult<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -36,6 +34,6 @@ public class PageResult implements Serializable {
 	private Long recordCount; // 数据总条数
 	
 	@Transient
-	private List<SolrCompany> companyList = new ArrayList<SolrCompany>(); // 结果集
+	private List<T> companyList = new ArrayList<T>(); // 结果集
 	
 }

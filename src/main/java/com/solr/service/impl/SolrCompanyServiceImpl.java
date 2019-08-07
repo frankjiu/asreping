@@ -18,9 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.domain.MacoArticle;
+import com.domain.QaSubject;
 import com.domain.PageResult;
-import com.repository.MacoArticleRepository;
+import com.domain.QaSubject;
+import com.repository.QaSubjectRepository;
 import com.solr.domain.SolrCompany;
 import com.solr.repository.SolrCompanyRepository;
 import com.solr.service.SolrCompanyService;
@@ -29,7 +30,7 @@ import com.solr.service.SolrCompanyService;
 public class SolrCompanyServiceImpl implements SolrCompanyService {
 	
 	@Autowired
-	private MacoArticleRepository macoArticleRepository;
+	private QaSubjectRepository qaSubjectRepository;
 	
 	@Autowired
 	private SolrCompanyRepository solrCompanyRepository;
@@ -48,14 +49,14 @@ public class SolrCompanyServiceImpl implements SolrCompanyService {
 		SolrCompany result = null;
 		try {
 			// 从数据库获取文章列表
-			List<MacoArticle> list = macoArticleRepository.findAll();
+			List<QaSubject> list = qaSubjectRepository.findAll();
 			// 循环将列表数据添加到索引库文档中
-			for (MacoArticle macoArticle : list) {
+			for (QaSubject qaSubject : list) {
 				// 创建一个solr的索引库文档
 				SolrInputDocument document = new SolrInputDocument();
-				document.addField("id", macoArticle.getId());
-				document.addField("name", macoArticle.getTitle());
-				document.addField("c_guard_machine", macoArticle.getContent());
+				document.addField("id", qaSubject.getId());
+				//document.addField("name", qaSubject.getTitle());
+				//document.addField("c_guard_machine", qaSubject.getContent());
 				solrClient.add(document);
 				solrClient.commit();
 			}

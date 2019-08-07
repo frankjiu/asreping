@@ -20,11 +20,11 @@ import com.domain.QaRole;
 import com.domain.QaRoleMenu;
 import com.domain.QaUser;
 import com.domain.QaUserRole;
-import com.service.MacoMenuService;
-import com.service.MacoRoleMenuService;
-import com.service.MacoRoleService;
-import com.service.MacoUserRoleService;
-import com.service.MacoUserService;
+import com.service.QaMenuService;
+import com.service.QaRoleMenuService;
+import com.service.QaRoleService;
+import com.service.QaUserRoleService;
+import com.service.QaUserService;
 import com.constant.Constants;
 import com.utils.LogAssist;
 import com.utils.LogOperation;
@@ -45,19 +45,19 @@ public class LoginController {
 	private final static Log LOGS = LogFactory.getLog(LoginController.class);
 
 	@Autowired
-	MacoUserService macoUserService;
+	QaUserService macoUserService;
 	
 	@Autowired
-	MacoUserRoleService macoUserRoleService;
+	QaUserRoleService macoUserRoleService;
 	
 	@Autowired
-	MacoRoleService macoRoleService;
+	QaRoleService macoRoleService;
 	
 	@Autowired
-	MacoRoleMenuService macoRoleMenuService;
+	QaRoleMenuService macoRoleMenuService;
 	
 	@Autowired
-	MacoMenuService macoMenuService;
+	QaMenuService macoMenuService;
 	
 	/**
 	 * 登录系统

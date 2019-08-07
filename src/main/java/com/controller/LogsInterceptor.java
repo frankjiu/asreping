@@ -17,17 +17,17 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.domain.QaLogs;
-import com.service.MacoLogsService;
+import com.service.QaLogsService;
 import com.constant.Constants;
 import com.utils.LogAssist;;
 
 public class LogsInterceptor implements HandlerInterceptor {
 
 	@Autowired
-	private MacoLogsService macoLogsService;
+	private QaLogsService macoLogsService;
 
 	/** 通过spring自动注入 */
-	public void setMacoLogsServiceImpl(MacoLogsService service) {
+	public void setMacoLogsServiceImpl(QaLogsService service) {
 		this.macoLogsService = service;
 	}	
 	
