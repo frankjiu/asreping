@@ -31,7 +31,7 @@ import com.utils.StringUtil;
 public class QaMenuServiceImpl implements QaMenuService {
 
 	@Autowired
-	private QaMenuRepository macoMenuRepository;
+	private QaMenuRepository qaMenuRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -41,8 +41,8 @@ public class QaMenuServiceImpl implements QaMenuService {
 	 */
 	@Override
 	public QaMenu getOne(String id) {
-		QaMenu macoMenu = macoMenuRepository.getOne(id);
-		return macoMenu;
+		QaMenu qaMenu = qaMenuRepository.getOne(id);
+		return qaMenu;
 	}
 	
 	/**
@@ -51,25 +51,25 @@ public class QaMenuServiceImpl implements QaMenuService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<QaMenu> getByAuth(QaMenu obj, String[] authArr) {
-		//List<MacoMenu> list = macoMenuRepository.getByAuth(macoMenu, authArr);
+		//List<QaMenu> list = qaMenuRepository.getByAuth(qaMenu, authArr);
 		//return list;
 		
 		if (obj instanceof QaMenu) {
 			DetachedCriteria criteria = DetachedCriteria.forClass(QaMenu.class);
-			QaMenu macoMenu = (QaMenu) obj;
-			String[] filedName = ConditionsFunction.getFiledName(macoMenu);
+			QaMenu qaMenu = (QaMenu) obj;
+			String[] filedName = ConditionsFunction.getFiledName(qaMenu);
 			for (int i = 0; i < filedName.length; i++) {
 				// 属性名
 				String name = filedName[i];
 				// 属性值
-				Object value = ConditionsFunction.getFieldValueByName(name, macoMenu);
+				Object value = ConditionsFunction.getFieldValueByName(name, qaMenu);
 				// 循环加入非空查询条件
 				if (value != null && !"children".equals(name)) {
 					criteria.add(Restrictions.eq(name, value));
 				}
 			}
-			// 如果macoMenu的ID值为空则则不属于根目录查询, 加入权限
-			if (StringUtil.isEmpty(macoMenu.getId()) && StringUtil.isNotEmptyArray(authArr)) {
+			// 如果qaMenu的ID值为空则则不属于根目录查询, 加入权限
+			if (StringUtil.isEmpty(qaMenu.getId()) && StringUtil.isNotEmptyArray(authArr)) {
 				criteria.add(Restrictions.in("id", authArr));
 			}
 			
@@ -97,7 +97,7 @@ public class QaMenuServiceImpl implements QaMenuService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<QaMenu> findTree(String[] authArr) {
-		//List<MacoMenu> list = macoMenuRepository.findTree(authArr);
+		//List<QaMenu> list = qaMenuRepository.findTree(authArr);
 		//return list;
 		
 		String sql = " SELECT MM.* FROM " +
@@ -130,8 +130,8 @@ public class QaMenuServiceImpl implements QaMenuService {
 	 */
 	@Override
 	@Transactional
-	public QaMenu save(QaMenu macoMenu) {
-		return macoMenuRepository.saveAndFlush(macoMenu);
+	public QaMenu save(QaMenu qaMenu) {
+		return qaMenuRepository.saveAndFlush(qaMenu);
 	}
 	
 	/**
@@ -140,7 +140,7 @@ public class QaMenuServiceImpl implements QaMenuService {
 	@Override
 	@Transactional
 	public void delete(String id){
-		macoMenuRepository.deleteById(id);
+		qaMenuRepository.deleteById(id);
 	}
 	
 	/**
@@ -148,8 +148,8 @@ public class QaMenuServiceImpl implements QaMenuService {
 	 */
 	@Override
 	@Transactional
-	public void update(QaMenu newMacoMenu) {
-		macoMenuRepository.saveAndFlush(newMacoMenu);
+	public void update(QaMenu newQaMenu) {
+		qaMenuRepository.saveAndFlush(newQaMenu);
 	}
 	
 }

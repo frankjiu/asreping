@@ -19,7 +19,7 @@ public interface QaLogsService {
 	
 	QaLogs getOne(String id);
 	
-	QaLogs save(QaLogs macoLogs);
+	QaLogs save(QaLogs qaLogs);
 	
 	List<QaLogs> findByUserId(String userId);
 	

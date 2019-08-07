@@ -27,7 +27,7 @@ import net.sf.json.JSONObject;
 public class QaUserRoleController {
 
 	@Autowired
-	private QaUserRoleService macoUserRoleService;
+	private QaUserRoleService qaUserRoleService;
 
 	/**
 	 * 主键查询
@@ -37,9 +37,9 @@ public class QaUserRoleController {
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "用户角色--主键查询")
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
-		QaUserRole macoUserRole = macoUserRoleService.getOne(id);
+		QaUserRole qaUserRole = qaUserRoleService.getOne(id);
 		try {
-			js.put("data", macoUserRole);
+			js.put("data", qaUserRole);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -60,12 +60,12 @@ public class QaUserRoleController {
 		JSONObject js = new JSONObject();
 		try {
 			List<QaUserRole> list = new ArrayList<QaUserRole>();
-			QaUserRole macoUserRole = new QaUserRole();
-			list = macoUserRoleService.findByUserId(userId);
+			QaUserRole qaUserRole = new QaUserRole();
+			list = qaUserRoleService.findByUserId(userId);
 			if (list != null && list.size() > 0) {
-				macoUserRole = list.get(0);
+				qaUserRole = list.get(0);
 			}
-			js.put("data", macoUserRole);
+			js.put("data", qaUserRole);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -82,11 +82,11 @@ public class QaUserRoleController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "用户角色--新增")
-	public String saveMacoUserRole(QaUserRole macoUserRole) {
+	public String saveQaUserRole(QaUserRole qaUserRole) {
 		JSONObject js = new JSONObject();
 		try {
-			macoUserRole = macoUserRoleService.save(macoUserRole);
-			js.put("id", macoUserRole.getId());
+			qaUserRole = qaUserRoleService.save(qaUserRole);
+			js.put("id", qaUserRole.getId());
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class QaUserRoleController {
 	public String delete(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			macoUserRoleService.delete(id);
+			qaUserRoleService.delete(id);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -126,8 +126,8 @@ public class QaUserRoleController {
 	public String update(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			QaUserRole newMacoUserRole = new QaUserRole();
-			macoUserRoleService.update(newMacoUserRole);
+			QaUserRole newQaUserRole = new QaUserRole();
+			qaUserRoleService.update(newQaUserRole);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {

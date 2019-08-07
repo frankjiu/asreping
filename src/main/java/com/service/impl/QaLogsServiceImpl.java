@@ -24,15 +24,15 @@ import com.service.QaLogsService;
 public class QaLogsServiceImpl implements QaLogsService {
 
 	@Autowired
-	private QaLogsRepository macoLogsRepository;
+	private QaLogsRepository qaLogsRepository;
 
 	/**
 	 * 主键查询
 	 */
 	@Override
 	public QaLogs getOne(String id) {
-		QaLogs macoLogs = macoLogsRepository.getOne(id);
-		return macoLogs;
+		QaLogs qaLogs = qaLogsRepository.getOne(id);
+		return qaLogs;
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class QaLogsServiceImpl implements QaLogsService {
 	 */
 	@Override
 	public List<QaLogs> findByUserId(String userId) {
-		List<QaLogs> MacoLogs = macoLogsRepository.findByUserId(userId);
-		return MacoLogs;
+		List<QaLogs> QaLogs = qaLogsRepository.findByUserId(userId);
+		return QaLogs;
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public class QaLogsServiceImpl implements QaLogsService {
 	 */
 	@Override
 	@Transactional
-	public QaLogs save(QaLogs macoLogs) {
-		return macoLogsRepository.saveAndFlush(macoLogs);
+	public QaLogs save(QaLogs qaLogs) {
+		return qaLogsRepository.saveAndFlush(qaLogs);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class QaLogsServiceImpl implements QaLogsService {
 	 */
 	@Override
 	public Page<Map<String,Object>> findPage(String userId, Date reateTimeBefore, Date createTimeAfter, Pageable pageable) {
-		Page<Map<String,Object>> page = macoLogsRepository.findPage(userId, reateTimeBefore, createTimeAfter, pageable);
+		Page<Map<String,Object>> page = qaLogsRepository.findPage(userId, reateTimeBefore, createTimeAfter, pageable);
 		return page;
 	}
 	

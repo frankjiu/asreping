@@ -24,55 +24,55 @@ import com.service.QaUserService;
 public class QaUserServiceImpl implements QaUserService {
 	
 	@Autowired
-	QaUserRepository macoUserRepository;
+	QaUserRepository qaUserRepository;
 	
 	public Optional<QaUser> findById(String id){
-		return macoUserRepository.findById(id);
+		return qaUserRepository.findById(id);
 	}
 
 	@Override
 	public QaUser getOne(String id) {
-		QaUser macoUser = macoUserRepository.findById(id).get();
-		return macoUser;
+		QaUser qaUser = qaUserRepository.findById(id).get();
+		return qaUser;
 	}
 
 	@Override
 	public List<QaUser> findByUserName(String userName) {
-		List<QaUser> list = macoUserRepository.findByUserName(userName);
+		List<QaUser> list = qaUserRepository.findByUserName(userName);
 		return list;
 	}
 	
 	@Override
-	public List<QaUser> findByLoginNameAndPassWord(QaUser macoUser) {
-		List<QaUser> list = macoUserRepository.findByLoginNameAndPassWord(macoUser.getLoginName(), macoUser.getPassWord());
+	public List<QaUser> findByLoginNameAndPassWord(QaUser qaUser) {
+		List<QaUser> list = qaUserRepository.findByLoginNameAndPassWord(qaUser.getLoginName(), qaUser.getPassWord());
 		return list;
 	}
 
 	@Override
-	public QaUser save(QaUser macoUser) {
-		macoUser = macoUserRepository.saveAndFlush(macoUser);
-		return macoUser;
+	public QaUser save(QaUser qaUser) {
+		qaUser = qaUserRepository.saveAndFlush(qaUser);
+		return qaUser;
 	}
 
 	@Override
 	public void delete(String id) {
-		macoUserRepository.deleteById(id);
+		qaUserRepository.deleteById(id);
 	}
 
 	@Override
-	public void update(QaUser newMacoUser) {
-		macoUserRepository.saveAndFlush(newMacoUser);
+	public void update(QaUser newQaUser) {
+		qaUserRepository.saveAndFlush(newQaUser);
 	}
 
 	@Override
 	public Integer count(QaUser query) {
-		Integer count = (int) macoUserRepository.count();
+		Integer count = (int) qaUserRepository.count();
 		return count;
 	}
 
 	@Override
-	//public List<MacoUser> paging(MacoUser query, PageUtil page) {
+	//public List<QaUser> paging(QaUser query, PageUtil page) {
 	public Page<Map<String,Object>> findPage(String loginName, Date createTimeBefore, Date createTimeAfter, Pageable pageable) {
-		return macoUserRepository.findPage(loginName, createTimeBefore, createTimeAfter, pageable);
+		return qaUserRepository.findPage(loginName, createTimeBefore, createTimeAfter, pageable);
 	}
 }

@@ -20,15 +20,15 @@ import com.service.QaRoleService;
 public class QaRoleServiceImpl implements QaRoleService {
 
 	@Autowired
-	private QaRoleRepository macoRoleRepository;
+	private QaRoleRepository qaRoleRepository;
 
 	/**
 	 * 主键查询
 	 */
 	@Override
 	public QaRole getOne(String id) {
-		QaRole macoRole = macoRoleRepository.getOne(id);
-		return macoRole;
+		QaRole qaRole = qaRoleRepository.getOne(id);
+		return qaRole;
 	}
 	
 	/**
@@ -36,8 +36,8 @@ public class QaRoleServiceImpl implements QaRoleService {
 	 */
 	@Override
 	@Transactional
-	public QaRole save(QaRole macoRole) {
-		return macoRoleRepository.saveAndFlush(macoRole);
+	public QaRole save(QaRole qaRole) {
+		return qaRoleRepository.saveAndFlush(qaRole);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class QaRoleServiceImpl implements QaRoleService {
 	@Override
 	@Transactional
 	public void delete(String id){
-		macoRoleRepository.deleteById(id);
+		qaRoleRepository.deleteById(id);
 	}
 	
 	/**
@@ -54,8 +54,8 @@ public class QaRoleServiceImpl implements QaRoleService {
 	 */
 	@Override
 	@Transactional
-	public void update(QaRole newMacoRole) {
-		macoRoleRepository.saveAndFlush(newMacoRole);
+	public void update(QaRole newQaRole) {
+		qaRoleRepository.saveAndFlush(newQaRole);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class QaRoleServiceImpl implements QaRoleService {
 	 */
 	@Override
 	public List<QaRole> findTree() {
-		List<QaRole> list = macoRoleRepository.findTree();
+		List<QaRole> list = qaRoleRepository.findTree();
 		return list;
 	}
 }

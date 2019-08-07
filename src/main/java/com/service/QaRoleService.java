@@ -16,10 +16,10 @@ public interface QaRoleService {
 	
 	List<QaRole> findTree();
 	
-	QaRole save(QaRole macoRole);
+	QaRole save(QaRole qaRole);
 	
 	void delete(String id);
 	
-	void update(QaRole newMacoRole);
+	void update(QaRole newQaRole);
 	
 }

@@ -20,15 +20,15 @@ import com.service.QaUserRoleService;
 public class QaUserRoleServiceImpl implements QaUserRoleService {
 
 	@Autowired
-	private QaUserRoleRepository macoUserRoleRepository;
+	private QaUserRoleRepository qaUserRoleRepository;
 
 	/**
 	 * 主键查询
 	 */
 	@Override
 	public QaUserRole getOne(String id) {
-		QaUserRole macoUserRole = macoUserRoleRepository.getOne(id);
-		return macoUserRole;
+		QaUserRole qaUserRole = qaUserRoleRepository.getOne(id);
+		return qaUserRole;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class QaUserRoleServiceImpl implements QaUserRoleService {
 	 */
 	@Override
 	public List<QaUserRole> findByUserId(String userId) {
-		return macoUserRoleRepository.findByUserId(userId);
+		return qaUserRoleRepository.findByUserId(userId);
 	}
 
 	/**
@@ -44,9 +44,9 @@ public class QaUserRoleServiceImpl implements QaUserRoleService {
 	 */
 	@Override
 	@Transactional
-	public QaUserRole save(QaUserRole macoUserRole) {
-		macoUserRole = macoUserRoleRepository.saveAndFlush(macoUserRole);
-		return macoUserRole;
+	public QaUserRole save(QaUserRole qaUserRole) {
+		qaUserRole = qaUserRoleRepository.saveAndFlush(qaUserRole);
+		return qaUserRole;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class QaUserRoleServiceImpl implements QaUserRoleService {
 	@Override
 	@Transactional
 	public void delete(String id) {
-		macoUserRoleRepository.deleteById(id);
+		qaUserRoleRepository.deleteById(id);
 	}
 
 	/**
@@ -63,8 +63,8 @@ public class QaUserRoleServiceImpl implements QaUserRoleService {
 	 */
 	@Override
 	@Transactional
-	public void update(QaUserRole newMacoUserRole) {
-		macoUserRoleRepository.saveAndFlush(newMacoUserRole);
+	public void update(QaUserRole newQaUserRole) {
+		qaUserRoleRepository.saveAndFlush(newQaUserRole);
 	}
 
 }

@@ -13,8 +13,8 @@ import com.domain.QaMenu;
  */
 public interface QaMenuRepository extends JpaRepository<QaMenu, String>, JpaSpecificationExecutor<QaMenu> {
 	
-	//List<MacoMenu> getByAuth(MacoMenu macoMenu, String[] authArr);
+	//List<QaMenu> getByAuth(QaMenu qaMenu, String[] authArr);
 	
-	//List<MacoMenu> findTree(String[] authArr);
+	//List<QaMenu> findTree(String[] authArr);
 	
 }

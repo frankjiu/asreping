@@ -20,7 +20,7 @@ public interface QaSubjectService {
 	
 	List<QaSubject> findTree();
 	
-	QaSubject save(QaSubject macoArticle);
+	QaSubject save(QaSubject qaSubject);
 	
 	void delete(String id);
 	

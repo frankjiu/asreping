@@ -36,7 +36,7 @@ import net.sf.json.JSONObject;
 public class QaLogsController {
 
 	@Autowired
-	private QaLogsService macoLogsService;
+	private QaLogsService qaLogsService;
 
 	/**
 	 * 跳转页面
@@ -56,8 +56,8 @@ public class QaLogsController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			QaLogs macoLogs = macoLogsService.getOne(id);
-			js.put("data", macoLogs);
+			QaLogs qaLogs = qaLogsService.getOne(id);
+			js.put("data", qaLogs);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -77,7 +77,7 @@ public class QaLogsController {
 	public String findByUserId(QaLogs query) {
 		JSONObject js = new JSONObject();
 		try {
-			List<QaLogs> list = macoLogsService.findByUserId(query.getUserId());
+			List<QaLogs> list = qaLogsService.findByUserId(query.getUserId());
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -95,19 +95,19 @@ public class QaLogsController {
 	@RequestMapping("/save1")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "日志--新增")
-	public String saveMacoLogs() {
+	public String saveQaLogs() {
 		JSONObject js = new JSONObject();
 		try {
 			// 测试数据
-			QaLogs macoLogs = new QaLogs();
-			macoLogs.setUserId("4028abbd69b495f40169b5b941990000");
-			macoLogs.setIpAddress("192.168.1.51");
-			macoLogs.setIntroduce("列表查询");
-			macoLogs.setOpModule("查询");
-			macoLogs.setCreateTime(new Date());
+			QaLogs qaLogs = new QaLogs();
+			qaLogs.setUserId("4028abbd69b495f40169b5b941990000");
+			qaLogs.setIpAddress("192.168.1.51");
+			qaLogs.setIntroduce("列表查询");
+			qaLogs.setOpModule("查询");
+			qaLogs.setCreateTime(new Date());
 			
-			macoLogs = macoLogsService.save(macoLogs);
-			js.put("id", macoLogs.getId());
+			qaLogs = qaLogsService.save(qaLogs);
+			js.put("id", qaLogs.getId());
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -132,7 +132,7 @@ public class QaLogsController {
 	        Pageable pageable = PageRequest.of(pageNum, pageSize);
 	        // 执行查询
 	        String userId = logs.getUserId() == null ? null : "%" + logs.getUserId() + "%";
-	        Page<Map<String,Object>> pageData = macoLogsService.findPage(userId, logs.getCreateTimeBefore(), logs.getCreateTimeAfter(), pageable);
+	        Page<Map<String,Object>> pageData = qaLogsService.findPage(userId, logs.getCreateTimeBefore(), logs.getCreateTimeAfter(), pageable);
  
 	        // Map转List
 	        List<QaLogs> list = new ArrayList<>();

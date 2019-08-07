@@ -34,6 +34,6 @@ public interface QaSubjectRepository extends JpaRepository<QaSubject, String>, J
 			
 			
 			nativeQuery = true)*/
-	//List<MacoArticleHelp> findTree(String sql, String menuDbStr, String keyword);
+	//List<QaArticleHelp> findTree(String sql, String menuDbStr, String keyword);
 	
 }

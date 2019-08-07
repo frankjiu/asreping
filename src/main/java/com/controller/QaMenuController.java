@@ -37,7 +37,7 @@ public class QaMenuController {
 	private HttpServletRequest request;
 	
 	@Autowired
-	private QaMenuService macoMenuService;
+	private QaMenuService qaMenuService;
 
 	/**
 	 * 跳转页面
@@ -57,7 +57,7 @@ public class QaMenuController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			QaMenu obj = macoMenuService.getOne(id);
+			QaMenu obj = qaMenuService.getOne(id);
 			js.put("data", obj);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -90,7 +90,7 @@ public class QaMenuController {
 			if (loginRoleName.contains("管理")) {
 				authArr = null;
 			}
-			List<QaMenu> list = macoMenuService.getByAuth(query, authArr);
+			List<QaMenu> list = qaMenuService.getByAuth(query, authArr);
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -125,7 +125,7 @@ public class QaMenuController {
 				authArr = null;
 			}
 			
-			list = macoMenuService.findTree(authArr);
+			list = qaMenuService.findTree(authArr);
 			List newList = new ArrayList<>();
 			for(QaMenu menu : list){
 				Map<Object,Object> map  = new LinkedHashMap<>();
@@ -174,7 +174,7 @@ public class QaMenuController {
 			}
 			
 			// 根目录集合数据
-			list = macoMenuService.getByAuth(query, authArr);
+			list = qaMenuService.getByAuth(query, authArr);
 			
 			// 调用递归函数
 			List<QaMenu> newList = TreeUtils.build(list);
@@ -196,13 +196,13 @@ public class QaMenuController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--新增")
-	public String saveMacoMenu(QaMenu macoMenu) {
+	public String saveQaMenu(QaMenu qaMenu) {
 		JSONObject js = new JSONObject();
-		macoMenu.setCreateTime(new Date());
-		macoMenu.setUpdateTime(new Date());
+		qaMenu.setCreateTime(new Date());
+		qaMenu.setUpdateTime(new Date());
 		try {
-			macoMenu = macoMenuService.save(macoMenu);
-			js.put("id", macoMenu.getId());
+			qaMenu = qaMenuService.save(qaMenu);
+			js.put("id", qaMenu.getId());
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -223,12 +223,12 @@ public class QaMenuController {
 		JSONObject js = new JSONObject();
 		try {
 			//禁止删除根菜单和一级菜单
-			QaMenu menu = macoMenuService.getOne(id);
+			QaMenu menu = qaMenuService.getOne(id);
 			if ((menu.getMenuLevel() != null && menu.getMenuLevel().equals(0)) || (menu.getMenuLevel() != null && menu.getMenuLevel().equals(1))) {
 				js.put("flag", false);
 				js.put("msg", "failure");
 			} else {
-				macoMenuService.delete(id);
+				qaMenuService.delete(id);
 				js.put("flag", true);
 				js.put("msg", "success");
 			}
@@ -246,20 +246,20 @@ public class QaMenuController {
 	@RequestMapping("/update")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_MODIFY, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--修改")
-	public String update(QaMenu newMacoMenu) {
+	public String update(QaMenu newQaMenu) {
 		JSONObject js = new JSONObject();
 		try {
 			// 查询原菜单数据
-			QaMenu menu = macoMenuService.getOne(newMacoMenu.getId());
+			QaMenu menu = qaMenuService.getOne(newQaMenu.getId());
 			
 			// 禁止修改根菜单
 			if (menu.getMenuLevel().equals(0)) {
 				js.put("flag", false);
 				return js.toString();
 			}
-			newMacoMenu.setCreateTime(menu.getCreateTime());
-			newMacoMenu.setUpdateTime(new Date());
-			macoMenuService.update(newMacoMenu);
+			newQaMenu.setCreateTime(menu.getCreateTime());
+			newQaMenu.setUpdateTime(new Date());
+			qaMenuService.update(newQaMenu);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {

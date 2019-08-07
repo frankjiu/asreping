@@ -27,32 +27,32 @@ import com.utils.StringUtil;
 public class QaSubjectServiceImpl implements QaSubjectService {
 
 	@Autowired
-	private QaSubjectRepository macoArticleRepository;
+	private QaSubjectRepository qaSubjectRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
 	public QaSubject getOne(String id) {
-		QaSubject macoArticle = macoArticleRepository.getOne(id);
-		return macoArticle;
+		QaSubject qaSubject = qaSubjectRepository.getOne(id);
+		return qaSubject;
 	}
 	
 	@Override
 	public List<QaSubject> findBySubjectName(String subjectName) {
-		List<QaSubject> QaSubject = macoArticleRepository.findBySubjectName(subjectName);
+		List<QaSubject> QaSubject = qaSubjectRepository.findBySubjectName(subjectName);
 		return QaSubject;
 	}
 	
 	@Override
 	public List<QaSubject> findBySubjectLevel(Integer subjectLevel) {
-		List<QaSubject> QaSubject = macoArticleRepository.findBySubjectLevel(subjectLevel);
+		List<QaSubject> QaSubject = qaSubjectRepository.findBySubjectLevel(subjectLevel);
 		return QaSubject;
 	}
 	
 	@Override
 	public List<QaSubject> findTree() {
-		List<QaSubject> list = macoArticleRepository.findAll();
+		List<QaSubject> list = qaSubjectRepository.findAll();
 		return list;
 	}
 	
@@ -61,8 +61,8 @@ public class QaSubjectServiceImpl implements QaSubjectService {
 	 */
 	@Override
 	@Transactional
-	public QaSubject save(QaSubject macoArticle) {
-		return macoArticleRepository.saveAndFlush(macoArticle);
+	public QaSubject save(QaSubject qaSubject) {
+		return qaSubjectRepository.saveAndFlush(qaSubject);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class QaSubjectServiceImpl implements QaSubjectService {
 	@Override
 	@Transactional
 	public void delete(String id){
-		macoArticleRepository.deleteById(id);
+		qaSubjectRepository.deleteById(id);
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class QaSubjectServiceImpl implements QaSubjectService {
 	@Override
 	@Transactional
 	public void update(QaSubject newQaSubject) {
-		macoArticleRepository.saveAndFlush(newQaSubject);
+		qaSubjectRepository.saveAndFlush(newQaSubject);
 	}
 	
 }

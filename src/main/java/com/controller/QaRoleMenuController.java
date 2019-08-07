@@ -26,7 +26,7 @@ import net.sf.json.JSONObject;
 public class QaRoleMenuController {
 
 	@Autowired
-	private QaRoleMenuService macoRoleMenuService;
+	private QaRoleMenuService qaRoleMenuService;
 
 	/**
 	 * 跳转页面
@@ -46,8 +46,8 @@ public class QaRoleMenuController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			QaRoleMenu macoRoleMenu = macoRoleMenuService.getOne(id);
-			js.put("data", macoRoleMenu);
+			QaRoleMenu qaRoleMenu = qaRoleMenuService.getOne(id);
+			js.put("data", qaRoleMenu);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {
@@ -67,7 +67,7 @@ public class QaRoleMenuController {
 	public String getBy(QaRoleMenu query) {
 		JSONObject js = new JSONObject();
 		try {
-			List<QaRoleMenu> list = macoRoleMenuService.getByRoleId(query.getRoleId());
+			List<QaRoleMenu> list = qaRoleMenuService.getByRoleId(query.getRoleId());
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -85,10 +85,10 @@ public class QaRoleMenuController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "角色菜单--新增")
-	public String saveMacoRoleMenu(String role_id, @RequestParam(value = "menu_ids[]") String[] menu_ids) {
+	public String saveQaRoleMenu(String role_id, @RequestParam(value = "menu_ids[]") String[] menu_ids) {
 		JSONObject js = new JSONObject();
 		try {
-			boolean flag = macoRoleMenuService.save(role_id, menu_ids);
+			boolean flag = qaRoleMenuService.save(role_id, menu_ids);
 			js.put("data", flag);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -109,7 +109,7 @@ public class QaRoleMenuController {
 	public String delete(String role_id, @RequestParam(value = "menu_ids[]") String[] menu_ids) {
 		JSONObject js = new JSONObject();
 		try {
-			macoRoleMenuService.deleteByRoleIdAndMenuIds(role_id, menu_ids);
+			qaRoleMenuService.deleteByRoleIdAndMenuIds(role_id, menu_ids);
 			js.put("flag", true);
 			js.put("msg", "success");
 		} catch (Exception e) {

@@ -21,17 +21,17 @@ public interface QaUserService {
 
 	List<QaUser> findByUserName(String userName);
 
-	List<QaUser> findByLoginNameAndPassWord(QaUser macoUser);
+	List<QaUser> findByLoginNameAndPassWord(QaUser qaUser);
 	
-	QaUser save(QaUser macoUser);
+	QaUser save(QaUser qaUser);
 
 	void delete(String id);
 
-	void update(QaUser newMacoUser);
+	void update(QaUser newQaUser);
 
 	Integer count(QaUser query);
 
-	//List<MacoUser> findPage(MacoUser macoUser, PageUtil page);
+	//List<QaUser> findPage(QaUser qaUser, PageUtil page);
 	Page<Map<String,Object>> findPage(String loginName, Date createTimeBefore, Date createTimeAfter, Pageable pageable);
 
 }

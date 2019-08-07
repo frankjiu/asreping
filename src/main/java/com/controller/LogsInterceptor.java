@@ -24,11 +24,11 @@ import com.utils.LogAssist;;
 public class LogsInterceptor implements HandlerInterceptor {
 
 	@Autowired
-	private QaLogsService macoLogsService;
+	private QaLogsService qaLogsService;
 
 	/** 通过spring自动注入 */
-	public void setMacoLogsServiceImpl(QaLogsService service) {
-		this.macoLogsService = service;
+	public void setQaLogsServiceImpl(QaLogsService service) {
+		this.qaLogsService = service;
 	}	
 	
 	/**
@@ -89,8 +89,8 @@ public class LogsInterceptor implements HandlerInterceptor {
 				// 记录日志
 				if (login_id != null) {
 					// 操作者
-					QaLogs macoLogs = new QaLogs();
-					macoLogs.setUserId(login_id);
+					QaLogs qaLogs = new QaLogs();
+					qaLogs.setUserId(login_id);
 
 					// 时间转化
 					DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -101,14 +101,14 @@ public class LogsInterceptor implements HandlerInterceptor {
 					Date date = formatter.parse(strDate);
 
 					// 操作IP和时间记录
-					macoLogs.setIpAddress(getIp(request));
-					macoLogs.setCreateTime(date);
+					qaLogs.setIpAddress(getIp(request));
+					qaLogs.setCreateTime(date);
 					// 获取访问方法的注解
 					LogAssist logAssist = methodHandler.getMethod().getAnnotation(LogAssist.class);
 					if (logAssist != null) {
-						macoLogs.setOpModule(logAssist.operationModule());
-						macoLogs.setIntroduce(logAssist.describe());
-						macoLogsService.save(macoLogs);
+						qaLogs.setOpModule(logAssist.operationModule());
+						qaLogs.setIntroduce(logAssist.describe());
+						qaLogsService.save(qaLogs);
 					}
 				}
 			}

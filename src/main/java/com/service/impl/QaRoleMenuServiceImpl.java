@@ -28,7 +28,7 @@ import com.utils.ArrayToDbString;
 public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 
 	@Autowired
-	private QaRoleMenuRepository macoRoleMenuRepository;
+	private QaRoleMenuRepository qaRoleMenuRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -38,8 +38,8 @@ public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 	 */
 	@Override
 	public QaRoleMenu getOne(String id) {
-		QaRoleMenu macoRoleMenu = macoRoleMenuRepository.getOne(id);
-		return macoRoleMenu;
+		QaRoleMenu qaRoleMenu = qaRoleMenuRepository.getOne(id);
+		return qaRoleMenu;
 	}
 	
 	/**
@@ -47,8 +47,8 @@ public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 	 */
 	@Override
 	public List<QaRoleMenu> getByRoleId(String id) {
-		List<QaRoleMenu> MacoRoleMenu = macoRoleMenuRepository.getByRoleId(id);
-		return MacoRoleMenu;
+		List<QaRoleMenu> QaRoleMenu = qaRoleMenuRepository.getByRoleId(id);
+		return QaRoleMenu;
 	}
 	
 	/**
@@ -61,15 +61,15 @@ public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 		List<String> list = new ArrayList<String>();
 		if (menu_ids != null && menu_ids.length > 0) {
 			for (int i = 0; i < menu_ids.length; i++) {
-				QaRoleMenu macoRoleMenu = new QaRoleMenu();
-				macoRoleMenu.setRoleId(role_id);
-				macoRoleMenu.setMenuId(menu_ids[i]);
-				macoRoleMenu.setCreateTime(new Date());
-				macoRoleMenu = macoRoleMenuRepository.save(macoRoleMenu);
+				QaRoleMenu qaRoleMenu = new QaRoleMenu();
+				qaRoleMenu.setRoleId(role_id);
+				qaRoleMenu.setMenuId(menu_ids[i]);
+				qaRoleMenu.setCreateTime(new Date());
+				qaRoleMenu = qaRoleMenuRepository.save(qaRoleMenu);
 				
-				list.add(macoRoleMenu.getId());
+				list.add(qaRoleMenu.getId());
 				if (i%10 == 0) {
-					macoRoleMenuRepository.flush();
+					qaRoleMenuRepository.flush();
 				}
 			}
 		}
@@ -87,18 +87,18 @@ public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 	@Override
 	@Transactional
 	public void deleteByRoleIdAndMenuIds(String role_id, @RequestParam(value = "menu_ids[]") String[] menu_ids){
-		/*macoRoleMenuRepository.deleteByRoleIdAndMenuIds(role_id, menu_ids);
+		/*qaRoleMenuRepository.deleteByRoleIdAndMenuIds(role_id, menu_ids);
 		List<String> list = new ArrayList<String>();
 		if (menu_ids != null && menu_ids.length > 0) {
 			for (int i = 0; i < menu_ids.length; i++) {
-				MacoRoleMenu macoRoleMenu = new MacoRoleMenu();
-				macoRoleMenu.setRoleId(role_id);
-				macoRoleMenu.setMenuId(menu_ids[i]);
-				macoRoleMenu.setCreateTime(new Date());
-				macoRoleMenuRepository.deleteByRoleIdAndMenuIds(role_id, menu_ids);
-				list.add(macoRoleMenu.getId());
+				QaRoleMenu qaRoleMenu = new QaRoleMenu();
+				qaRoleMenu.setRoleId(role_id);
+				qaRoleMenu.setMenuId(menu_ids[i]);
+				qaRoleMenu.setCreateTime(new Date());
+				qaRoleMenuRepository.deleteByRoleIdAndMenuIds(role_id, menu_ids);
+				list.add(qaRoleMenu.getId());
 				if (i%10 == 0) {
-					macoRoleMenuRepository.flush();
+					qaRoleMenuRepository.flush();
 				}
 			}
 		}*/
@@ -109,7 +109,7 @@ public class QaRoleMenuServiceImpl implements QaRoleMenuService {
 		Query query = entityManager.createNativeQuery(sql);
 		query.executeUpdate();
 		
-		//int num = getCurrentSession().createSQLQuery(sql.toString()).addEntity(MacoRoleMenu.class).executeUpdate();
+		//int num = getCurrentSession().createSQLQuery(sql.toString()).addEntity(QaRoleMenu.class).executeUpdate();
 		/*if (num == menu_ids.length) {
 			return true;
 		}else {

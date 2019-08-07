@@ -14,14 +14,14 @@ public interface QaMenuService {
 	
 	QaMenu getOne(String id);
 	
-	List<QaMenu> getByAuth(QaMenu macoMenu, String[] authArr);
+	List<QaMenu> getByAuth(QaMenu qaMenu, String[] authArr);
 	
 	List<QaMenu> findTree(String[] authArr);
 	
-	QaMenu save(QaMenu macoMenu);
+	QaMenu save(QaMenu qaMenu);
 	
 	void delete(String id);
 	
-	void update(QaMenu newMacoMenu);
+	void update(QaMenu newQaMenu);
 	
 }

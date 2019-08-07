@@ -28,7 +28,7 @@ import net.sf.json.JSONObject;
  * @date: 2018年4月6日 下午8:00:49
  */
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/subject")
 public class QaSubjectController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class QaSubjectController {
 	@RequestMapping("/")
 	@LogAssist(operationType = LogOperation.OP_GOTO, operationModule = LogOperation.WP_ARTICLE, describe = "学科--跳转页面")
 	public String to(String id) {
-		return "/article_manage";
+		return "/subject_manage";
 	}
 	
 	/**
@@ -135,12 +135,12 @@ public class QaSubjectController {
 				map.put("id", qaSubject.getId());
 				map.put("pid", qaSubject.getPid());
 				map.put("name", qaSubject.getSubjectName());
-				/*map.put("times", article.getTimes());
-				map.put("keyword", article.getKeyword());
-				map.put("content", article.getContent());
-				map.put("author", article.getAuthor());
-				map.put("update_time", article.getUpdate_time());
-				map.put("create_time", article.getCreate_time());*/
+				/*map.put("times", subject.getTimes());
+				map.put("keyword", subject.getKeyword());
+				map.put("content", subject.getContent());
+				map.put("author", subject.getAuthor());
+				map.put("update_time", subject.getUpdate_time());
+				map.put("create_time", subject.getCreate_time());*/
 				newList.add(map);
 			}
 			js.put("data", newList);

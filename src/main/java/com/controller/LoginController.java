@@ -45,19 +45,19 @@ public class LoginController {
 	private final static Log LOGS = LogFactory.getLog(LoginController.class);
 
 	@Autowired
-	QaUserService macoUserService;
+	QaUserService qaUserService;
 	
 	@Autowired
-	QaUserRoleService macoUserRoleService;
+	QaUserRoleService qaUserRoleService;
 	
 	@Autowired
-	QaRoleService macoRoleService;
+	QaRoleService qaRoleService;
 	
 	@Autowired
-	QaRoleMenuService macoRoleMenuService;
+	QaRoleMenuService qaRoleMenuService;
 	
 	@Autowired
-	QaMenuService macoMenuService;
+	QaMenuService qaMenuService;
 	
 	/**
 	 * 登录系统
@@ -65,18 +65,18 @@ public class LoginController {
 	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_LOGIN, operationModule = LogOperation.WP_SYSTEM, describe = "登录系统")
-	public String checkLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, QaUser macoUser, String menuRootId) {
+	public String checkLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, QaUser qaUser, String menuRootId) {
 		// 获取session值使用false, 有就返回值, 否则返回null
 		String innerCode = (String) request.getSession().getAttribute("imgCode");
 		JSONObject js = new JSONObject();
 		try {
 			//密码加密
-			macoUser.setPassWord(MD5Helper.encode(macoUser.getPassWord()));
-			List<QaUser> userList = macoUserService.findByLoginNameAndPassWord(macoUser);
+			qaUser.setPassWord(MD5Helper.encode(qaUser.getPassWord()));
+			List<QaUser> userList = qaUserService.findByLoginNameAndPassWord(qaUser);
 			QaUser loginUser = null;
 			if (userList != null && userList.size() > 0) {
 				loginUser = userList.get(0);
-				loginUser.setCode(macoUser.getCode());
+				loginUser.setCode(qaUser.getCode());
 			}
 			// 若:卡密信息不正确
 			if (loginUser == null) {
@@ -106,13 +106,13 @@ public class LoginController {
 				session.setAttribute(Constants.SESSION_LOGIN_NAME, user.getLoginName());
 				// 用户角色
 				QaUserRole userRole = new QaUserRole();
-				List<QaUserRole> list = macoUserRoleService.findByUserId(user.getId());
+				List<QaUserRole> list = qaUserRoleService.findByUserId(user.getId());
 				if (list != null && list.size() > 0 ) userRole = list.get(0);
-				QaRole role = macoRoleService.getOne(userRole.getRoleId());
+				QaRole role = qaRoleService.getOne(userRole.getRoleId());
 				session.setAttribute(Constants.SESSION_LOGIN_ROLE_ID, role.getId());
 				session.setAttribute(Constants.SESSION_LOGIN_ROLE, role.getRoleName());
 				// 用户权限(用户角色--拥有的菜单ids: 根据用户角色ID查询菜单ID)
-				List<QaRoleMenu> roleMenuList = macoRoleMenuService.getByRoleId(role.getId());
+				List<QaRoleMenu> roleMenuList = qaRoleMenuService.getByRoleId(role.getId());
 				List<String> menuIdList = new ArrayList<String>();
 				
 				if (roleMenuList != null && roleMenuList.size() > 0) {
@@ -130,7 +130,7 @@ public class LoginController {
 				session.setAttribute(Constants.SESSION_MENU_IDS_ARRAY, menuIdArray);
 				// 更新用户登录时间
 				user.setLoginTime(new Date());
-				macoUserService.update(user);
+				qaUserService.update(user);
 				// 清除密码
 				user.setPassWord("");
 				// 设置session失效时间30分钟
@@ -163,15 +163,15 @@ public class LoginController {
 				return null;
 			}
 			String userId = (String) session.getAttribute(Constants.SESSION_LOGIN_ID);
-			List<MacoMenu> list = new ArrayList<MacoMenu>();
+			List<QaMenu> list = new ArrayList<QaMenu>();
 			List<String> menuIdList = new ArrayList<String>();
 			// 根据登录id查询登陆者可访问菜单权限
-			List<MacoMenu> parentList = macoUserService.findParentMenu(userId, menuRootId);
-			List<MacoMenu> childMenuList = new ArrayList<MacoMenu>();
+			List<QaMenu> parentList = qaUserService.findParentMenu(userId, menuRootId);
+			List<QaMenu> childMenuList = new ArrayList<QaMenu>();
 			for (int i = 0; i < parentList.size(); i++) {
-				MacoMenu parentMenu = parentList.get(i);
+				QaMenu parentMenu = parentList.get(i);
 				String parentMenuId = String.valueOf(parentMenu.getId());
-				childMenuList = macoUserService.findChildMenu(userId, parentMenuId);
+				childMenuList = qaUserService.findChildMenu(userId, parentMenuId);
 				parentMenu.setChildren(childMenuList);
 				list.add(parentMenu);
 				menuIdList.add(parentMenu.getId());

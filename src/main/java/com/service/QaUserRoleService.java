@@ -16,10 +16,10 @@ public interface QaUserRoleService {
 
 	List<QaUserRole> findByUserId(String id);
 
-	QaUserRole save(QaUserRole macoUserRole);
+	QaUserRole save(QaUserRole qaUserRole);
 
 	void delete(String id);
 
-	void update(QaUserRole newMacoUserRole);
+	void update(QaUserRole newQaUserRole);
 
 }
