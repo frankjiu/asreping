@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.domain.MacoRole;
-import com.domain.MacoUser;
-import com.domain.MacoUserRole;
+import com.domain.QaRole;
+import com.domain.QaUser;
+import com.domain.QaUserRole;
 import com.service.MacoRoleService;
 import com.service.MacoUserRoleService;
 import com.service.MacoUserService;
@@ -77,9 +77,9 @@ public class MacoUserController {
 		JSONObject js = new JSONObject();
 		try {
 			// 查询用户
-			MacoUser macoUser = macoUserService.getOne(id);
+			QaUser macoUser = macoUserService.getOne(id);
 			// 根据用户ID查询用户角色
-			List<MacoUserRole> macoUserRoleList = macoUserRoleService.findByUserId(id);
+			List<QaUserRole> macoUserRoleList = macoUserRoleService.findByUserId(id);
 			if (macoUserRoleList != null && macoUserRoleList.size() > 0) macoUser.setRoleId(macoUserRoleList.get(0).getRoleId());
 			js.put("data", macoUser);
 			js.put("flag", true);
@@ -100,11 +100,11 @@ public class MacoUserController {
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "用户--条件查询")
 	@ApiOperation(value="查询用户", notes="根据UserName条件查询用户")
 	@ApiImplicitParam(name = "userName", value = "用户userName", required = true, dataType = "String")
-	public String findByUserName(MacoUser query) {
+	public String findByUserName(QaUser query) {
 		JSONObject js = new JSONObject();
 		try {
 			// 查询用户
-			List<MacoUser> list = macoUserService.findByUserName(query.getUserName());
+			List<QaUser> list = macoUserService.findByUserName(query.getUserName());
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -124,7 +124,7 @@ public class MacoUserController {
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "用户--新增")
 	@ApiOperation(value="创建用户", notes="根据User对象创建用户")
 	@ApiImplicitParam(name = "macoUser", value = "用户详细实体macoUser", required = true, dataType = "MacoUser")
-	public String saveMacoUser(MacoUser macoUser) {
+	public String saveMacoUser(QaUser macoUser) {
 		JSONObject js = new JSONObject();
 		// 密码加密
 		macoUser.setPassWord(MD5Helper.encode(macoUser.getPassWord()));
@@ -137,7 +137,7 @@ public class MacoUserController {
 			macoUser = macoUserService.save(macoUser);
 			
 			//初始化用户角色为普通角色
-			MacoUserRole macoUserRole = new MacoUserRole();
+			QaUserRole macoUserRole = new QaUserRole();
 			macoUserRole.setUserId(macoUser.getId());
 			macoUserRole.setRoleId(macoUser.getRoleId());
 			macoUserRole.setCreateTime(new Date());
@@ -165,16 +165,16 @@ public class MacoUserController {
 		JSONObject js = new JSONObject();
 		try {
 			//查询用户角色
-			MacoUserRole macoUserRole = new MacoUserRole();
+			QaUserRole macoUserRole = new QaUserRole();
 			macoUserRole.setUserId(id);
-			List<MacoUserRole> list = macoUserRoleService.findByUserId(id);
-			MacoUserRole userRole = new MacoUserRole();
+			List<QaUserRole> list = macoUserRoleService.findByUserId(id);
+			QaUserRole userRole = new QaUserRole();
 			if (list != null && list.size() > 0 ) {
 				userRole = list.get(0);
 			}
 			
 			//根据主键查询角色
-			MacoRole role = macoRoleService.getOne(userRole.getRoleId());
+			QaRole role = macoRoleService.getOne(userRole.getRoleId());
 			//禁止删除管理员和VIP用户
 			if (role.getClasses() == 0 || role.getClasses() == 1) {
 				js.put("flag", false);
@@ -203,7 +203,7 @@ public class MacoUserController {
 	@LogAssist(operationType = LogOperation.OP_MODIFY, operationModule = LogOperation.WP_SYSTEM, describe = "用户--修改")
 	@ApiOperation(value="更新用户", notes="根据主键ID更新用户")
 	@ApiImplicitParam(name = "id", value = "用户主键ID", required = true, dataType = "String")
-	public String update(MacoUser newMacoUser) {
+	public String update(QaUser newMacoUser) {
 		newMacoUser.setUpdateTime(new Date());
 		JSONObject js = new JSONObject();
 		try {
@@ -216,14 +216,14 @@ public class MacoUserController {
 			
 			//修改用户角色
 			//1.1 根据主键查询角色
-			List<MacoUserRole> list = macoUserRoleService.findByUserId(newMacoUser.getId());
-			MacoUserRole userRole = new MacoUserRole();
+			List<QaUserRole> list = macoUserRoleService.findByUserId(newMacoUser.getId());
+			QaUserRole userRole = new QaUserRole();
 			if (list != null && list.size() > 0 ) userRole = list.get(0);
 			
 			// 判断角色类型
 			if (userRole.getRoleId() != null) {
 				// 根据主键查询角色
-				MacoRole role = macoRoleService.getOne(userRole.getRoleId());
+				QaRole role = macoRoleService.getOne(userRole.getRoleId());
 				// 禁止修改管理员用户
 				boolean flag = request.getSession(false).getAttribute(Constants.SESSION_LOGIN_ROLE).toString().contains("管理");
 				if (!flag) {
@@ -261,7 +261,7 @@ public class MacoUserController {
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "用户--分页计数")
 	@ApiOperation(value="统计", notes="分页计数")
-	public String count(MacoUser query) {
+	public String count(QaUser query) {
 		JSONObject js = new JSONObject();
 		int count = 0;
 		try {
@@ -284,7 +284,7 @@ public class MacoUserController {
 	@RequestMapping("/findPage")
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "用户--分页条件查询")
 	@ApiOperation(value="分页查询", notes="分页条件查询")
-	public ResponseEntity<ResultVo> findPage(HttpServletRequest request, MacoUser user, Integer page, Integer limit) {
+	public ResponseEntity<ResultVo> findPage(HttpServletRequest request, QaUser user, Integer page, Integer limit) {
 		ResultVo resultVo = new ResultVo();
 		try {
 			Integer pageNum = page == null ? 0 : page-1;  //注意此处,其它插件设置为1,此处从0开始.
@@ -296,11 +296,11 @@ public class MacoUserController {
 	        Page<Map<String,Object>> pageData = macoUserService.findPage(loginName, user.getCreateTimeBefore(), user.getCreateTimeAfter(), pageable);
  
 	        // Map转List
-	        List<MacoUser> list = new ArrayList<>();
+	        List<QaUser> list = new ArrayList<>();
 	        List<Map<String, Object>> mapList = pageData.getContent();
 	        for (int i = 0; i < mapList.size(); i++) {
 	        	Map<String, Object> map = mapList.get(i);
-	        	MacoUser entity = JSON.parseObject(JSON.toJSONString(map), MacoUser.class);
+	        	QaUser entity = JSON.parseObject(JSON.toJSONString(map), QaUser.class);
 	        	list.add(entity);
 	        } 
 			

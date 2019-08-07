@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.domain.MacoUserRole;
+import com.domain.QaUserRole;
 import com.repository.MacoUserRoleRepository;
 import com.service.MacoUserRoleService;
 
@@ -26,8 +26,8 @@ public class MacoUserRoleServiceImpl implements MacoUserRoleService {
 	 * 主键查询
 	 */
 	@Override
-	public MacoUserRole getOne(String id) {
-		MacoUserRole macoUserRole = macoUserRoleRepository.getOne(id);
+	public QaUserRole getOne(String id) {
+		QaUserRole macoUserRole = macoUserRoleRepository.getOne(id);
 		return macoUserRole;
 	}
 
@@ -35,7 +35,7 @@ public class MacoUserRoleServiceImpl implements MacoUserRoleService {
 	 * 条件UserId查询
 	 */
 	@Override
-	public List<MacoUserRole> findByUserId(String userId) {
+	public List<QaUserRole> findByUserId(String userId) {
 		return macoUserRoleRepository.findByUserId(userId);
 	}
 
@@ -44,7 +44,7 @@ public class MacoUserRoleServiceImpl implements MacoUserRoleService {
 	 */
 	@Override
 	@Transactional
-	public MacoUserRole save(MacoUserRole macoUserRole) {
+	public QaUserRole save(QaUserRole macoUserRole) {
 		macoUserRole = macoUserRoleRepository.saveAndFlush(macoUserRole);
 		return macoUserRole;
 	}
@@ -63,7 +63,7 @@ public class MacoUserRoleServiceImpl implements MacoUserRoleService {
 	 */
 	@Override
 	@Transactional
-	public void update(MacoUserRole newMacoUserRole) {
+	public void update(QaUserRole newMacoUserRole) {
 		macoUserRoleRepository.saveAndFlush(newMacoUserRole);
 	}
 

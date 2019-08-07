@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.domain.MacoLogs;
+import com.domain.QaLogs;
 import com.service.MacoLogsService;
 import com.utils.LogAssist;
 import com.utils.LogOperation;
@@ -56,7 +56,7 @@ public class MacoLogsController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			MacoLogs macoLogs = macoLogsService.getOne(id);
+			QaLogs macoLogs = macoLogsService.getOne(id);
 			js.put("data", macoLogs);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -74,10 +74,10 @@ public class MacoLogsController {
 	@RequestMapping("/findByUserId")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "日志--条件查询")
-	public String findByUserId(MacoLogs query) {
+	public String findByUserId(QaLogs query) {
 		JSONObject js = new JSONObject();
 		try {
-			List<MacoLogs> list = macoLogsService.findByUserId(query.getUserId());
+			List<QaLogs> list = macoLogsService.findByUserId(query.getUserId());
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -99,7 +99,7 @@ public class MacoLogsController {
 		JSONObject js = new JSONObject();
 		try {
 			// 测试数据
-			MacoLogs macoLogs = new MacoLogs();
+			QaLogs macoLogs = new QaLogs();
 			macoLogs.setUserId("4028abbd69b495f40169b5b941990000");
 			macoLogs.setIpAddress("192.168.1.51");
 			macoLogs.setIntroduce("列表查询");
@@ -123,7 +123,7 @@ public class MacoLogsController {
 	 */
 	@RequestMapping("/findPage")
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "日志--分页查询")
-	public ResponseEntity<ResultVo> findPage(HttpServletRequest request, MacoLogs logs, Integer page, Integer limit) {
+	public ResponseEntity<ResultVo> findPage(HttpServletRequest request, QaLogs logs, Integer page, Integer limit) {
 		ResultVo resultVo = new ResultVo();
 		try {
 			Integer pageNum = page == null ? 0 : page-1;  //注意此处,其它插件设置为1,此处从0开始.
@@ -135,11 +135,11 @@ public class MacoLogsController {
 	        Page<Map<String,Object>> pageData = macoLogsService.findPage(userId, logs.getCreateTimeBefore(), logs.getCreateTimeAfter(), pageable);
  
 	        // Map转List
-	        List<MacoLogs> list = new ArrayList<>();
+	        List<QaLogs> list = new ArrayList<>();
 	        List<Map<String, Object>> mapList = pageData.getContent();
 	        for (int i = 0; i < mapList.size(); i++) {
 	        	Map<String, Object> map = mapList.get(i);
-	        	MacoLogs entity = JSON.parseObject(JSON.toJSONString(map), MacoLogs.class);
+	        	QaLogs entity = JSON.parseObject(JSON.toJSONString(map), QaLogs.class);
 	        	list.add(entity);
 	        }
 			

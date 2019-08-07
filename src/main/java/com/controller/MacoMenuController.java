@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.domain.MacoMenu;
+import com.domain.QaMenu;
 import com.service.MacoMenuService;
 import com.constant.Constants;
 import com.utils.LogAssist;
@@ -57,7 +57,7 @@ public class MacoMenuController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			MacoMenu obj = macoMenuService.getOne(id);
+			QaMenu obj = macoMenuService.getOne(id);
 			js.put("data", obj);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -76,7 +76,7 @@ public class MacoMenuController {
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--条件查询")
 	@SuppressWarnings("unchecked")
-	public String getByAuth(MacoMenu query) {
+	public String getByAuth(QaMenu query) {
 		JSONObject js = new JSONObject();
 		try {
 			HttpSession session = request.getSession(false);
@@ -90,7 +90,7 @@ public class MacoMenuController {
 			if (loginRoleName.contains("管理")) {
 				authArr = null;
 			}
-			List<MacoMenu> list = macoMenuService.getByAuth(query, authArr);
+			List<QaMenu> list = macoMenuService.getByAuth(query, authArr);
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -111,7 +111,7 @@ public class MacoMenuController {
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--树查询")
 	public String findTree(String id) {
 		JSONObject js = new JSONObject();
-		List<MacoMenu> list = null;
+		List<QaMenu> list = null;
 		try {
 			HttpSession session = request.getSession(false);
 			String loginRoleName = session.getAttribute(Constants.SESSION_LOGIN_ROLE).toString();
@@ -127,7 +127,7 @@ public class MacoMenuController {
 			
 			list = macoMenuService.findTree(authArr);
 			List newList = new ArrayList<>();
-			for(MacoMenu menu : list){
+			for(QaMenu menu : list){
 				Map<Object,Object> map  = new LinkedHashMap<>();
 				map.put("id", menu.getId());
 				map.put("name", menu.getMenuName());
@@ -157,9 +157,9 @@ public class MacoMenuController {
 	@RequestMapping("/getRecurse")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--自定义Recurse递归查询子集")
-	public String getRecurse(MacoMenu query) {
+	public String getRecurse(QaMenu query) {
 		JSONObject js = new JSONObject();
-		List<MacoMenu> list = new ArrayList<MacoMenu>();
+		List<QaMenu> list = new ArrayList<QaMenu>();
 		try {
 			HttpSession session = request.getSession(false);
 			String loginRoleName = session.getAttribute(Constants.SESSION_LOGIN_ROLE).toString();
@@ -177,7 +177,7 @@ public class MacoMenuController {
 			list = macoMenuService.getByAuth(query, authArr);
 			
 			// 调用递归函数
-			List<MacoMenu> newList = TreeUtils.build(list);
+			List<QaMenu> newList = TreeUtils.build(list);
 			
 			js.put("data", newList);
 			js.put("flag", true);
@@ -196,7 +196,7 @@ public class MacoMenuController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--新增")
-	public String saveMacoMenu(MacoMenu macoMenu) {
+	public String saveMacoMenu(QaMenu macoMenu) {
 		JSONObject js = new JSONObject();
 		macoMenu.setCreateTime(new Date());
 		macoMenu.setUpdateTime(new Date());
@@ -223,7 +223,7 @@ public class MacoMenuController {
 		JSONObject js = new JSONObject();
 		try {
 			//禁止删除根菜单和一级菜单
-			MacoMenu menu = macoMenuService.getOne(id);
+			QaMenu menu = macoMenuService.getOne(id);
 			if ((menu.getMenuLevel() != null && menu.getMenuLevel().equals(0)) || (menu.getMenuLevel() != null && menu.getMenuLevel().equals(1))) {
 				js.put("flag", false);
 				js.put("msg", "failure");
@@ -246,11 +246,11 @@ public class MacoMenuController {
 	@RequestMapping("/update")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_MODIFY, operationModule = LogOperation.WP_SYSTEM, describe = "菜单--修改")
-	public String update(MacoMenu newMacoMenu) {
+	public String update(QaMenu newMacoMenu) {
 		JSONObject js = new JSONObject();
 		try {
 			// 查询原菜单数据
-			MacoMenu menu = macoMenuService.getOne(newMacoMenu.getId());
+			QaMenu menu = macoMenuService.getOne(newMacoMenu.getId());
 			
 			// 禁止修改根菜单
 			if (menu.getMenuLevel().equals(0)) {

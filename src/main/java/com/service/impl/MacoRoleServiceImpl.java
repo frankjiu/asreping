@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.domain.MacoRole;
+import com.domain.QaRole;
 import com.repository.MacoRoleRepository;
 import com.service.MacoRoleService;
 
@@ -26,8 +26,8 @@ public class MacoRoleServiceImpl implements MacoRoleService {
 	 * 主键查询
 	 */
 	@Override
-	public MacoRole getOne(String id) {
-		MacoRole macoRole = macoRoleRepository.getOne(id);
+	public QaRole getOne(String id) {
+		QaRole macoRole = macoRoleRepository.getOne(id);
 		return macoRole;
 	}
 	
@@ -36,7 +36,7 @@ public class MacoRoleServiceImpl implements MacoRoleService {
 	 */
 	@Override
 	@Transactional
-	public MacoRole save(MacoRole macoRole) {
+	public QaRole save(QaRole macoRole) {
 		return macoRoleRepository.saveAndFlush(macoRole);
 	}
 	
@@ -54,7 +54,7 @@ public class MacoRoleServiceImpl implements MacoRoleService {
 	 */
 	@Override
 	@Transactional
-	public void update(MacoRole newMacoRole) {
+	public void update(QaRole newMacoRole) {
 		macoRoleRepository.saveAndFlush(newMacoRole);
 	}
 	
@@ -62,8 +62,8 @@ public class MacoRoleServiceImpl implements MacoRoleService {
 	 * 树查询
 	 */
 	@Override
-	public List<MacoRole> findTree() {
-		List<MacoRole> list = macoRoleRepository.findTree();
+	public List<QaRole> findTree() {
+		List<QaRole> list = macoRoleRepository.findTree();
 		return list;
 	}
 }

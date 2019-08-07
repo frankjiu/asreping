@@ -8,41 +8,58 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
 /**
- * 用户角色实体类
+ * 日志实体类
  * 
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-
 @Data
 @Entity
-@Table(name = "MACO_USER_ROLE")
-public class MacoUserRole implements Serializable {
+@Table(name = "MACO_LOGS")
+public class QaLogs implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	// 主键
 	@Id  
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(name = "ID", nullable = false, unique = true)
 	private String id;
 
+	// 操作用户
 	@Column(name = "USER_ID")
 	private String userId;
 
-	@Column(name = "ROLE_ID")
-	private String roleId;
+	// 用户IP地址
+	@Column(name = "IP_ADDRESS")
+	private String ipAddress;
 
+	// 操作模块
+	@Column(name = "OP_MODULE")
+	private String opModule;
+
+	// 操作描述
+	@Column(name = "INTRODUCE")
+	private String introduce;
+	
+	// 操作时间
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
-
-	@Column(name = "UPDATE_TIME")
-	private Date updateTime;
+	
+	// 起始操作时间
+	@Transient
+	private Date createTimeBefore;
+	
+	// 结束操作时间
+	@Transient
+	private Date createTimeAfter;
 
 }

@@ -16,7 +16,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.domain.MacoLogs;
+import com.domain.QaLogs;
 import com.service.MacoLogsService;
 import com.constant.Constants;
 import com.utils.LogAssist;;
@@ -89,7 +89,7 @@ public class LogsInterceptor implements HandlerInterceptor {
 				// 记录日志
 				if (login_id != null) {
 					// 操作者
-					MacoLogs macoLogs = new MacoLogs();
+					QaLogs macoLogs = new QaLogs();
 					macoLogs.setUserId(login_id);
 
 					// 时间转化

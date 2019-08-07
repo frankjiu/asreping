@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import com.domain.MacoLogs;
+import com.domain.QaLogs;
 
 /**
  * 持久层接口
@@ -18,9 +18,9 @@ import com.domain.MacoLogs;
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-public interface MacoLogsRepository extends JpaRepository<MacoLogs, String>, JpaSpecificationExecutor<MacoLogs> {
+public interface MacoLogsRepository extends JpaRepository<QaLogs, String>, JpaSpecificationExecutor<QaLogs> {
 	
-	List<MacoLogs> findByUserId(String userId);
+	List<QaLogs> findByUserId(String userId);
 	
 	@Query(value = " select u.*, p.`name` policeName from login_user u "
 			+ " LEFT JOIN police_info p ON u.police_id = p.id "

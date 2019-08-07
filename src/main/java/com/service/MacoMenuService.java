@@ -2,7 +2,7 @@ package com.service;
 
 import java.util.List;
 
-import com.domain.MacoMenu;
+import com.domain.QaMenu;
 
 /**
  * 服务层接口
@@ -12,16 +12,16 @@ import com.domain.MacoMenu;
  */
 public interface MacoMenuService {
 	
-	MacoMenu getOne(String id);
+	QaMenu getOne(String id);
 	
-	List<MacoMenu> getByAuth(MacoMenu macoMenu, String[] authArr);
+	List<QaMenu> getByAuth(QaMenu macoMenu, String[] authArr);
 	
-	List<MacoMenu> findTree(String[] authArr);
+	List<QaMenu> findTree(String[] authArr);
 	
-	MacoMenu save(MacoMenu macoMenu);
+	QaMenu save(QaMenu macoMenu);
 	
 	void delete(String id);
 	
-	void update(MacoMenu newMacoMenu);
+	void update(QaMenu newMacoMenu);
 	
 }

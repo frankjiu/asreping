@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.ConditionsFunction;
-import com.domain.MacoMenu;
+import com.domain.QaMenu;
 import com.repository.MacoMenuRepository;
 import com.service.MacoMenuService;
 import com.utils.ArrayToDbString;
@@ -40,8 +40,8 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 	 * 主键查询
 	 */
 	@Override
-	public MacoMenu getOne(String id) {
-		MacoMenu macoMenu = macoMenuRepository.getOne(id);
+	public QaMenu getOne(String id) {
+		QaMenu macoMenu = macoMenuRepository.getOne(id);
 		return macoMenu;
 	}
 	
@@ -50,13 +50,13 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MacoMenu> getByAuth(MacoMenu obj, String[] authArr) {
+	public List<QaMenu> getByAuth(QaMenu obj, String[] authArr) {
 		//List<MacoMenu> list = macoMenuRepository.getByAuth(macoMenu, authArr);
 		//return list;
 		
-		if (obj instanceof MacoMenu) {
-			DetachedCriteria criteria = DetachedCriteria.forClass(MacoMenu.class);
-			MacoMenu macoMenu = (MacoMenu) obj;
+		if (obj instanceof QaMenu) {
+			DetachedCriteria criteria = DetachedCriteria.forClass(QaMenu.class);
+			QaMenu macoMenu = (QaMenu) obj;
 			String[] filedName = ConditionsFunction.getFiledName(macoMenu);
 			for (int i = 0; i < filedName.length; i++) {
 				// 属性名
@@ -83,7 +83,7 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 			
 			Criteria ct = criteria.getExecutableCriteria(cfg.buildSessionFactory().getCurrentSession());
 			
-			List<MacoMenu> list = (List<MacoMenu>) ct.list();
+			List<QaMenu> list = (List<QaMenu>) ct.list();
 			return list;
 		} else {
 			return null;
@@ -96,7 +96,7 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<MacoMenu> findTree(String[] authArr) {
+	public List<QaMenu> findTree(String[] authArr) {
 		//List<MacoMenu> list = macoMenuRepository.findTree(authArr);
 		//return list;
 		
@@ -130,7 +130,7 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 	 */
 	@Override
 	@Transactional
-	public MacoMenu save(MacoMenu macoMenu) {
+	public QaMenu save(QaMenu macoMenu) {
 		return macoMenuRepository.saveAndFlush(macoMenu);
 	}
 	
@@ -148,7 +148,7 @@ public class MacoMenuServiceImpl implements MacoMenuService {
 	 */
 	@Override
 	@Transactional
-	public void update(MacoMenu newMacoMenu) {
+	public void update(QaMenu newMacoMenu) {
 		macoMenuRepository.saveAndFlush(newMacoMenu);
 	}
 	

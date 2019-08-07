@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import com.domain.MacoRole;
+import com.domain.QaRole;
 
 /**
  * 持久层接口
@@ -14,13 +14,13 @@ import com.domain.MacoRole;
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-public interface MacoRoleRepository extends JpaRepository<MacoRole, String>, JpaSpecificationExecutor<MacoRole> {
+public interface MacoRoleRepository extends JpaRepository<QaRole, String>, JpaSpecificationExecutor<QaRole> {
 	
 	@Query(value = " SELECT M.* " +
 				 " FROM   MACO_ROLE M " + 
 				 " WHERE  1 = 1 " + 
 				 " START  WITH M.PID = '0' " + 
 				 " CONNECT BY PRIOR M.ID = M.PID ", nativeQuery = true )
-	List<MacoRole> findTree();
+	List<QaRole> findTree();
 	
 }

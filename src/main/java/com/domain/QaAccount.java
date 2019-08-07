@@ -8,51 +8,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
 /**
- * 日志实体类
+ * 账户实体类
  * 
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-
 @Data
 @Entity
-@Table(name = "MACO_LOGS")
-public class MacoLogs implements Serializable {
+@Table(name = "QA_ACCOUNT")
+public class QaAccount implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
-	@Id  
+	
+	// 主键
+	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(name = "ID", nullable = false, unique = true)
 	private String id;
-
+	
+	// 用户主键
 	@Column(name = "USER_ID")
-	private String userId;
-
-	@Column(name = "IP_ADDRESS")
-	private String ipAddress;
-
-	@Column(name = "OP_MODULE")
-	private String opModule;
-
-	@Column(name = "INTRODUCE")
-	private String introduce;
-
+	private String questionId;
+	
+	// 金币总数
+	@Column(name = "TOTAL_COIN")
+	private Integer answer;
+	
+	// 账户余额
+	@Column(name = "MONEY")
+	private Integer answerPic;
+	
+	// 创建时间
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
 	
-	@Transient
-	private Date createTimeBefore;
+	// 更新时间
+	@Column(name = "UPDATE_TIME")
+	private Date updateTime;
 	
-	@Transient
-	private Date createTimeAfter;
-
 }

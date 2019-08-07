@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.domain.MacoLogs;
+import com.domain.QaLogs;
 
 /**
  * 服务层接口
@@ -17,11 +17,11 @@ import com.domain.MacoLogs;
  */
 public interface MacoLogsService {
 	
-	MacoLogs getOne(String id);
+	QaLogs getOne(String id);
 	
-	MacoLogs save(MacoLogs macoLogs);
+	QaLogs save(QaLogs macoLogs);
 	
-	List<MacoLogs> findByUserId(String userId);
+	List<QaLogs> findByUserId(String userId);
 	
 	Page<Map<String,Object>> findPage(String userId, Date reateTimeBefore, Date createTimeAfter, Pageable pageable);
 	

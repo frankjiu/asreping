@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.domain.MacoLogs;
+import com.domain.QaLogs;
 import com.repository.MacoLogsRepository;
 import com.service.MacoLogsService;
 
@@ -30,8 +30,8 @@ public class MacoLogsServiceImpl implements MacoLogsService {
 	 * 主键查询
 	 */
 	@Override
-	public MacoLogs getOne(String id) {
-		MacoLogs macoLogs = macoLogsRepository.getOne(id);
+	public QaLogs getOne(String id) {
+		QaLogs macoLogs = macoLogsRepository.getOne(id);
 		return macoLogs;
 	}
 	
@@ -39,8 +39,8 @@ public class MacoLogsServiceImpl implements MacoLogsService {
 	 * 条件查询
 	 */
 	@Override
-	public List<MacoLogs> findByUserId(String userId) {
-		List<MacoLogs> MacoLogs = macoLogsRepository.findByUserId(userId);
+	public List<QaLogs> findByUserId(String userId) {
+		List<QaLogs> MacoLogs = macoLogsRepository.findByUserId(userId);
 		return MacoLogs;
 	}
 	
@@ -49,7 +49,7 @@ public class MacoLogsServiceImpl implements MacoLogsService {
 	 */
 	@Override
 	@Transactional
-	public MacoLogs save(MacoLogs macoLogs) {
+	public QaLogs save(QaLogs macoLogs) {
 		return macoLogsRepository.saveAndFlush(macoLogs);
 	}
 	

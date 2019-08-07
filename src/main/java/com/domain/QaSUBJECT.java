@@ -11,51 +11,49 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.utils.TreeNode;
-
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
- * 菜单实体类
+ * 学科实体类
  * 
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-
 @Data
 @Entity
-@Table(name = "MACO_MENU")
-@EqualsAndHashCode(callSuper=true)
-public class MacoMenu extends TreeNode implements Serializable {
+@Table(name = "QA_SUBJECT")
+public class QaSUBJECT implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	// 主键
 	@Id  
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(name = "ID", nullable = false, unique = true)
 	private String id;
 
-	@Column(name = "MENU_NAME")
-	private String menuName;
+	// 学科名称
+	@Column(name = "SUBJECT_NAME")
+	private String subjectName;
 
-	@Column(name = "MENU_URL")
-	private String menuUrl;
-	
+	// 父学科ID
 	@Column(name = "PID")
 	private String pid;
 	
-	@Column(name = "MENU_LEVEL")
-	private Integer menuLevel;
+	// 学科层级
+	@Column(name = "SUBJECT_LEVEL")
+	private Integer subjectLevel;
 	
+	// 学科序号,默认未排序0
 	@Column(name = "INDEX_ORDER")
 	private Integer indexOrder;
 	
-	//@JsonFormat(pattern="yyyy-MM-dd  HH:mm:ss",timezone="GMT+8")
+	// 创建时间
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
 
+	// 更新时间
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
 	

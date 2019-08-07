@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.domain.MacoUserRole;
+import com.domain.QaUserRole;
 import com.service.MacoUserRoleService;
 import com.utils.LogAssist;
 import com.utils.LogOperation;
@@ -37,7 +37,7 @@ public class MacoUserRoleController {
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "用户角色--主键查询")
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
-		MacoUserRole macoUserRole = macoUserRoleService.getOne(id);
+		QaUserRole macoUserRole = macoUserRoleService.getOne(id);
 		try {
 			js.put("data", macoUserRole);
 			js.put("flag", true);
@@ -59,8 +59,8 @@ public class MacoUserRoleController {
 	public String findByUserId(String userId) {
 		JSONObject js = new JSONObject();
 		try {
-			List<MacoUserRole> list = new ArrayList<MacoUserRole>();
-			MacoUserRole macoUserRole = new MacoUserRole();
+			List<QaUserRole> list = new ArrayList<QaUserRole>();
+			QaUserRole macoUserRole = new QaUserRole();
 			list = macoUserRoleService.findByUserId(userId);
 			if (list != null && list.size() > 0) {
 				macoUserRole = list.get(0);
@@ -82,7 +82,7 @@ public class MacoUserRoleController {
 	@RequestMapping("/save")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_ADD, operationModule = LogOperation.WP_SYSTEM, describe = "用户角色--新增")
-	public String saveMacoUserRole(MacoUserRole macoUserRole) {
+	public String saveMacoUserRole(QaUserRole macoUserRole) {
 		JSONObject js = new JSONObject();
 		try {
 			macoUserRole = macoUserRoleService.save(macoUserRole);
@@ -126,7 +126,7 @@ public class MacoUserRoleController {
 	public String update(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			MacoUserRole newMacoUserRole = new MacoUserRole();
+			QaUserRole newMacoUserRole = new QaUserRole();
 			macoUserRoleService.update(newMacoUserRole);
 			js.put("flag", true);
 			js.put("msg", "success");

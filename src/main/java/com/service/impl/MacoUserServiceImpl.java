@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.domain.MacoUser;
+import com.domain.QaUser;
 import com.repository.MacoUserRepository;
 import com.service.MacoUserService;
 
@@ -26,30 +26,30 @@ public class MacoUserServiceImpl implements MacoUserService {
 	@Autowired
 	MacoUserRepository macoUserRepository;
 	
-	public Optional<MacoUser> findById(String id){
+	public Optional<QaUser> findById(String id){
 		return macoUserRepository.findById(id);
 	}
 
 	@Override
-	public MacoUser getOne(String id) {
-		MacoUser macoUser = macoUserRepository.findById(id).get();
+	public QaUser getOne(String id) {
+		QaUser macoUser = macoUserRepository.findById(id).get();
 		return macoUser;
 	}
 
 	@Override
-	public List<MacoUser> findByUserName(String userName) {
-		List<MacoUser> list = macoUserRepository.findByUserName(userName);
+	public List<QaUser> findByUserName(String userName) {
+		List<QaUser> list = macoUserRepository.findByUserName(userName);
 		return list;
 	}
 	
 	@Override
-	public List<MacoUser> findByLoginNameAndPassWord(MacoUser macoUser) {
-		List<MacoUser> list = macoUserRepository.findByLoginNameAndPassWord(macoUser.getLoginName(), macoUser.getPassWord());
+	public List<QaUser> findByLoginNameAndPassWord(QaUser macoUser) {
+		List<QaUser> list = macoUserRepository.findByLoginNameAndPassWord(macoUser.getLoginName(), macoUser.getPassWord());
 		return list;
 	}
 
 	@Override
-	public MacoUser save(MacoUser macoUser) {
+	public QaUser save(QaUser macoUser) {
 		macoUser = macoUserRepository.saveAndFlush(macoUser);
 		return macoUser;
 	}
@@ -60,12 +60,12 @@ public class MacoUserServiceImpl implements MacoUserService {
 	}
 
 	@Override
-	public void update(MacoUser newMacoUser) {
+	public void update(QaUser newMacoUser) {
 		macoUserRepository.saveAndFlush(newMacoUser);
 	}
 
 	@Override
-	public Integer count(MacoUser query) {
+	public Integer count(QaUser query) {
 		Integer count = (int) macoUserRepository.count();
 		return count;
 	}

@@ -1,297 +1,194 @@
-一.表结构设计
+一.表结构设计与创建表脚本:
+CREATE TABLE QA_USER(
+ID VARCHAR(32) 									COMMENT '主键'                                   ,
+USER_NAME VARCHAR(30)							COMMENT '姓名'                                   ,
+LOGIN_NAME VARCHAR(50)							COMMENT '账号'                                   ,
+ 
+PASS_WORD VARCHAR(32)							COMMENT '密码'									 ,				 
+MOBILE_PHONE VARCHAR(11)    					COMMENT '手机号码'						         ,
+WECHAT VARCHAR(50)          					COMMENT '微信号' 								 ,
 
-	--1.用户表  MACO_USER
-	主键 ID VARCHAR2(100)
-	姓名 USER_NAME VARCHAR2(50)
-	账号 LOGIN_NAME VARCHAR2(100)
-	密码 PASS_WORD VARCHAR2(100)
-	手机号码 MOBILE_PHONE VARCHAR2(50)
-	微信号 WECHAT VARCHAR2(50)
-	电子邮箱 EMAIL VARCHAR2(50)
-	是否冻结 0: 否/1: 是  IS_FREEZE NUMBER(1)
-	最近登录时间 LOGIN_TIME DATE
-	最近退出时间 LOGOUT_TIME DATE
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
+ID_CARD VARCHAR(18)         					COMMENT '身份证号' 							     ,
+EMAIL VARCHAR(50)           					COMMENT '电子邮箱' 							     ,
+IS_FREEZE INT(1)            					COMMENT '是否冻结 0:否/1:是'   				 	 ,
 
-	--2.用户角色表  MACO_USER_ROLE
-	主键 ID VARCHAR2(100)
-	用户ID USER_ID VARCHAR2(100)
-	角色ID ROLE_ID VARCHAR2(100)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
+SUBJECT_ID VARCHAR(32)              			COMMENT '专业学科ID'  						     ,
+HAS_UPDATED BOOLEAN DEFAULT FALSE				COMMENT '是否已修改过学科'  					 ,
+POINTS INT(11)              					COMMENT '用户积分'                               ,
 
-	--3.角色表  MACO_ROLE
-	主键 ID VARCHAR2(100)
-	角色 ROLE_NAME VARCHAR2(50)
-	父角色 PID VARCHAR2(100)
-	角色级别 CLASSES NUMBER(1)
-	是否停用 0: 否/1: 是  IS_STOP NUMBER(1)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
+GRADE VARCHAR(6) 	        					COMMENT '用户级别称谓,根据积分判断'              ,
+COIN_RATIO INT(1)           					COMMENT '金币奖励系数 普通用户:1/专家用户:2'	 ,
+LOGIN_TIME DATETIME         					COMMENT '最近登录时间' 						     ,
 
-	--4.角色菜单表  MACO_ROLE_MENU
-	主键 ID VARCHAR2(100)
-	角色ID ROLE_ID VARCHAR2(100)
-	菜单ID MENU_ID VARCHAR2(100)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
+LOGOUT_TIME DATETIME        					COMMENT '最近退出时间'                           ,
+CREATE_TIME DATETIME        					COMMENT '创建时间'                               ,
+UPDATE_TIME DATETIME    						COMMENT '更新时间'                               ,
 
-	--5.菜单表  MACO_MENU
-	主键 ID VARCHAR2(100)
-	菜单名称  MENU_NAME VARCHAR2(50)
-	菜单URL地址  MENU_URL VARCHAR2(100)
-	父菜单ID PID VARCHAR2(100)
-	菜单层级 MENU_LEVEL NUMBER(1)
-	菜单序号,默认未排序0 INDEX_ORDER NUMBER(9)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
-
-	--6.文章表  MACO_ARTICLE
-	主键 ID VARCHAR2(100)
-	标题 TITLE VARCHAR2(100)
-	关键字 KEYWORD VARCHAR2(100)
-	文章内容 CONTENT CLOB
-	文章父目录 PID VARCHAR2(100)
-	作者 AUTHOR VARCHAR2(50)
-	浏览次数 TIMES NUMBER(9)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
-
-	--7.多媒体表  MACO_MEDIA
-	主键 ID VARCHAR2(100)
-	标题 TITLE VARCHAR2(100)
-	作者 AUTHOR VARCHAR2(50)
-	浏览次数 TIMES NUMBER(9)
-	媒体数据 MEDIA_SOURCE BLOB
-	媒体父目录 PID VARCHAR2(100)
-	媒体类型  1:图片 2:歌曲 3:视频 MEDIA_SOURCE NUMBER(1)
-	创建时间 CREATE_TIME DATE
-	更新时间 UPDATE_TIME DATE
-
-	--8.日志表 MACO_LOGS
-	主键 ID VARCHAR2(100)
-	操作用户 USER_ID VARCHAR2(100)
-	用户IP地址 IP_ADDRESS VARCHAR2(25)
-	操作模块 OP_MODULE VARCHAR2(50)
-	操作描述 INTRODUCE VARCHAR2(100)
-	操作时间 CREATE_TIME DATE
-================================================================================================
-
-二.表创建语句
-
-	--1. MACO_USER
-	create table MACO_USER(
-	  ID VARCHAR2(100) primary key     ,
-	  USER_NAME VARCHAR2(50)        ,
-	  LOGIN_NAME VARCHAR2(100)      ,
-	  
-	  PASS_WORD VARCHAR2(100)       ,
-	  MOBILE_PHONE VARCHAR2(50) ,
-	  WECHAT VARCHAR2(50)         ,
-	  
-	  EMAIL VARCHAR2(50)        ,
-	  IS_FREEZE NUMBER(1)	,
-	  LOGIN_TIME DATE       ,
-	  
-	  LOGOUT_TIME DATE      ,
-	  CREATE_TIME DATE          ,
-	  UPDATE_TIME DATE          
-	)
-	comment on table MACO_USER is '用户表';
-
-	comment on column MACO_USER.ID is '主键';
-	comment on column MACO_USER.USER_NAME is '姓名';
-	comment on column MACO_USER.LOGIN_NAME is '账号';
-
-	comment on column MACO_USER.PASS_WORD is '密码';
-	comment on column MACO_USER.MOBILE_PHONE is '手机号码';
-	comment on column MACO_USER.WECHAT is '微信号';
-
-	comment on column MACO_USER.EMAIL is '电子邮箱';
-	comment on column MACO_USER.IS_FREEZE is '是否冻结 0: 否/1: 是';
-	comment on column MACO_USER.LOGIN_TIME is '最近登录时间';
-	
-	comment on column MACO_USER.LOGOUT_TIME is '最近退出时间';
-	comment on column MACO_USER.CREATE_TIME is '创建时间';
-	comment on column MACO_USER.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	--2. MACO_USER_ROLE
-	create table MACO_USER_ROLE(
-	  ID VARCHAR2(100) primary key     ,
-	  USER_ID VARCHAR2(100)        ,
-	  ROLE_ID VARCHAR2(100)      ,
-	  
-	  CREATE_TIME DATE          ,
-	  UPDATE_TIME DATE          
-	)
-	comment on table MACO_USER_ROLE is '用户角色表';
-
-	comment on column MACO_USER_ROLE.ID is '主键';
-	comment on column MACO_USER_ROLE.USER_ID is '用户ID';
-	comment on column MACO_USER_ROLE.ROLE_ID is '角色ID';
-
-	comment on column MACO_USER_ROLE.CREATE_TIME is '创建时间';
-	comment on column MACO_USER_ROLE.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	--3. MACO_ROLE
-	create table MACO_ROLE(
-	  ID VARCHAR2(100) primary key     ,
-	  ROLE_NAME VARCHAR2(50)        ,
-	  PID VARCHAR2(100)      ,
-	  
-	  CLASSES NUMBER(1)   	,
-	  IS_STOP NUMBER(1)		,
-	  CREATE_TIME DATE          ,
-	  
-	  UPDATE_TIME DATE          
-	)
-	comment on table MACO_ROLE is '角色表';
-
-	comment on column MACO_ROLE.ID is '主键';
-	comment on column MACO_ROLE.ROLE_NAME is '角色';
-	comment on column MACO_ROLE.PID is '父角色';
-	
-	comment on column MACO_ROLE.CLASSES is '角色级别 0:管理员  1:VIP  2:普通';
-	comment on column MACO_ROLE.IS_STOP is '是否停用 0: 否/1: 是';
-	comment on column MACO_ROLE.CREATE_TIME is '创建时间';
-	
-	comment on column MACO_ROLE.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	--4. MACO_ROLE_MENU
-	create table MACO_ROLE_MENU(
-	  ID VARCHAR2(100) primary key     ,
-	  ROLE_ID VARCHAR2(100)        ,
-	  MENU_ID VARCHAR2(100)      ,
-	  
-	  CREATE_TIME DATE          ,
-	  UPDATE_TIME DATE          
-	)
-	comment on table MACO_ROLE_MENU is '角色菜单表';
-
-	comment on column MACO_ROLE_MENU.ID is '主键';
-	comment on column MACO_ROLE_MENU.ROLE_ID is '角色ID';
-	comment on column MACO_ROLE_MENU.MENU_ID is '菜单ID';
-
-	comment on column MACO_ROLE_MENU.CREATE_TIME is '创建时间';
-	comment on column MACO_ROLE_MENU.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	--5. MACO_MENU
-	create table MACO_MENU(
-	  ID VARCHAR2(100) primary key     ,
-	  MENU_NAME VARCHAR2(50)        ,
-	  MENU_URL VARCHAR2(100)      ,
-	  
-	  PID VARCHAR2(100),
-	  MENU_LEVEL NUMBER(1),
-	  INDEX_ORDER NUMBER(9),
-	  
-	  CREATE_TIME DATE          ,
-	  UPDATE_TIME DATE          
-	)
-	comment on table MACO_MENU is '菜单表';
-
-	comment on column MACO_MENU.ID is '主键';
-	comment on column MACO_MENU.MENU_NAME is '菜单名称';
-	comment on column MACO_MENU.MENU_URL is '菜单URL地址';
-
-	comment on column MACO_MENU.PID is '父菜单ID';
-	comment on column MACO_MENU.MENU_LEVEL is '菜单层级';
-	comment on column MACO_MENU.INDEX_ORDER is '菜单序号,默认未排序0';
-
-	comment on column MACO_MENU.CREATE_TIME is '创建时间';
-	comment on column MACO_MENU.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	--6. MACO_ARTICLE
-	create table MACO_ARTICLE(
-	  ID VARCHAR2(100) primary key     ,
-	  TITLE VARCHAR2(100),
-	  KEYWORD VARCHAR2(100) ,
-									
-	  CONTENT CLOB 	  ,
-	  PID VARCHAR2(100)	  ,
-	  AUTHOR VARCHAR2(50)     ,
-	  
-	  TIMES NUMBER(9)     ,
-	  CREATE_TIME DATE    ,
-	  UPDATE_TIME DATE    
-	)
-	comment on table MACO_ARTICLE is '文章表';
-
-	comment on column MACO_ARTICLE.ID is '主键';
-	comment on column MACO_ARTICLE.TITLE is '标题';
-	comment on column MACO_ARTICLE.KEYWORD is '关键字';
-
-	comment on column MACO_ARTICLE.CONTENT is '文章内容';
-	comment on column MACO_ARTICLE.PID is '文章父目录(二级菜单目录)';
-	comment on column MACO_ARTICLE.AUTHOR is '作者';
-	
-	comment on column MACO_ARTICLE.TIMES is '浏览次数';
-	comment on column MACO_ARTICLE.CREATE_TIME is '创建时间';
-	comment on column MACO_ARTICLE.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	--7. MACO_MEDIA
-	create table MACO_MEDIA(
-	  ID VARCHAR2(100) primary key,
-	  TITLE VARCHAR2(100),
-	  AUTHOR VARCHAR2(50),
-
-	  TIMES NUMBER(9),
-	  MEDIA_SOURCE BLOB,
-	  PID VARCHAR2(100),
-	  
-	  MEDIA_TYPE NUMBER(1),
-	  CREATE_TIME DATE,
-	  UPDATE_TIME DATE  
-	)
-	comment on table MACO_MEDIA is '多媒体表';
-
-	comment on column MACO_MEDIA.ID is '主键';
-	comment on column MACO_MEDIA.TITLE is '标题';
-	comment on column MACO_MEDIA.AUTHOR is '作者';
-
-	comment on column MACO_MEDIA.TIMES is '浏览次数';
-	comment on column MACO_MEDIA.MEDIA_SOURCE is '媒体数据';
-	comment on column MACO_MEDIA.PID is '媒体父目录(二级菜单目录)';
-	
-	comment on column MACO_MEDIA.MEDIA_TYPE is '媒体类型  1:图片 2:歌曲 3:视频';
-	comment on column MACO_MEDIA.CREATE_TIME is '创建时间';
-	comment on column MACO_MEDIA.UPDATE_TIME is '更新时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PRIMARY KEY (ID)
+) ENGINE=INNODB CHARSET=UTF8 COMMENT='用户表';
 
 
-	--8. MACO_LOGS
-	CREATE TABLE MACO_LOGS(
-		ID VARCHAR2(100) PRIMARY KEY     ,
-		USER_ID VARCHAR2(100)        ,
-		IP_ADDRESS VARCHAR2(25),
+
+CREATE TABLE QA_USER_ROLE(
+ID VARCHAR(32)                   COMMENT '主键',  	
+USER_ID VARCHAR(32)              COMMENT '用户ID',  
+ROLE_ID VARCHAR(32)              COMMENT '角色ID',  
+
+CREATE_TIME DATETIME             COMMENT '创建时间',
+UPDATE_TIME DATETIME         	 COMMENT '更新时间',
+
+PRIMARY KEY (ID)
+) ENGINE=INNODB CHARSET=UTF8 COMMENT='用户角色表';
+
+
+
+CREATE TABLE QA_ROLE(
+ID VARCHAR(32)               COMMENT '主键',  								
+ROLE_NAME VARCHAR(20)        COMMENT '角色:普通用户/专家用户/管理员/黑名单',
+							 
+IS_STOP INT(1)               COMMENT '是否停用 0:否/1:是',   				
+CREATE_TIME DATETIME         COMMENT '创建时间',  							
+UPDATE_TIME DATETIME     	 COMMENT '更新时间',  							
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='角色表';
+
+
+
+CREATE TABLE QA_ROLE_MENU(
+ID VARCHAR(32)											COMMENT '主键',  	
+ROLE_ID VARCHAR(32)         							COMMENT '角色ID',  
+MENU_ID VARCHAR(32)         							COMMENT '菜单ID',  
+
+CREATE_TIME DATETIME        							COMMENT '创建时间',
+UPDATE_TIME DATETIME    								COMMENT '更新时间',
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='角色菜单表';
+
+
+
+CREATE TABLE QA_MENU(	
+ID VARCHAR(32)                        COMMENT '主键',
+MENU_NAME VARCHAR(50)                 COMMENT '菜单名称',  							
+MENU_URL VARCHAR(32)                  COMMENT '菜单URL地址',
+						
+PID VARCHAR(32)                       COMMENT '父菜单ID', 							
+MENU_LEVEL INT(1)                     COMMENT '菜单层级 0:根菜单/1:父菜单/2:子菜单',	
+INDEX_ORDER INT(2)                    COMMENT '菜单序号,默认未排序0',
+ 				
+CREATE_TIME DATETIME                  COMMENT '创建时间', 							
+UPDATE_TIME DATETIME                  COMMENT '更新时间', 							
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='菜单表';
+
+
+
+CREATE TABLE QA_SUBJECT(
+ID VARCHAR(32)                                             COMMENT '主键', 				
+SUBJECT_NAME VARCHAR(50)                                   COMMENT '学科名称',  			
+PID VARCHAR(32)                                            COMMENT '父学科ID',
+ 			                                               
+SUBJECT_LEVEL INT(1)                                       COMMENT '学科层级', 			
+INDEX_ORDER INT(1)                                         COMMENT '学科序号,默认未排序0',
+CREATE_TIME DATETIME                                       COMMENT '创建时间',
 		
-		OP_MODULE VARCHAR2(50)      ,
-		INTRODUCE VARCHAR2(100),
-		CREATE_TIME DATE
-	)
-	comment on table MACO_LOGS is '日志表';
-	
-	comment on column MACO_LOGS.ID is '主键';
-	comment on column MACO_LOGS.USER_ID is '操作用户';
-	comment on column MACO_LOGS.IP_ADDRESS is '用户IP地址';
-	
-	comment on column MACO_LOGS.OP_MODULE is '操作模块';
-	comment on column MACO_LOGS.INTRODUCE is '操作描述';
-	comment on column MACO_LOGS.CREATE_TIME is '操作时间';
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+UPDATE_TIME DATETIME                                       COMMENT '更新时间', 			
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='学科表';
+
+
+
+CREATE TABLE QA_QUESTION(
+ID VARCHAR(32)                                          COMMENT '主键', 				
+QUESTION VARCHAR(1000)                                  COMMENT '问题文字描述', 		
+QUESTION_PIC VARCHAR(50)                                COMMENT '问题辅助描述图片路径',
+
+USER_ID VARCHAR(32)                                     COMMENT '提问者', 				
+CREATE_TIME DATETIME                                    COMMENT '创建时间', 			
+UPDATE_TIME DATETIME                                	COMMENT '更新时间', 			
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='问题表';
+
+
+
+CREATE TABLE QA_ANSWER(
+ID VARCHAR(32)                			COMMENT '主键', 												
+QUESTION_ID VARCHAR(32)       			COMMENT '回答对应问题的主键', 									
+ANSWER VARCHAR(1000)          			COMMENT '回答文字描述', 										
+						 
+ANSWER_PIC VARCHAR(50)        			COMMENT '回答辅助图片路径', 									
+STARS INT(1)                  			COMMENT '评价星级:1-5星级',									
+COINS INT(11)                     		COMMENT '获得金币数10*K',  									
+									
+K DOUBLE(2,1)	                  		COMMENT '评价系数常量K:1星:0.1/2星:0.3/3星:0.5/4星:0.8/5星:1', 
+CREATE_TIME DATETIME          			COMMENT '创建时间', 											
+UPDATE_TIME DATETIME          			COMMENT '更新时间', 											
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='回答表';
+
+
+
+CREATE TABLE QA_ACCOUNT(
+ID VARCHAR(32)                                 COMMENT '主键', 	
+USER_ID  VARCHAR(32)                           COMMENT '用户主键',
+TOTAL_COIN INT(5)                              COMMENT '金币总数',
+
+MONEY INT(3)                                   COMMENT '账户余额',
+CREATE_TIME DATETIME                           COMMENT '创建时间',
+UPDATE_TIME DATETIME                           COMMENT '更新时间',
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='账户表';
+
+
+
+CREATE TABLE QA_LOGS(
+ID VARCHAR(32)                                          COMMENT '主键', 	
+USER_ID VARCHAR(32)                                     COMMENT '操作用户', 
+IP_ADDRESS VARCHAR(25)                                  COMMENT '用户IP地址',
+
+OP_MODULE VARCHAR(50)                                   COMMENT '操作模块', 
+INTRODUCE VARCHAR(32)                                   COMMENT '操作描述', 
+CREATE_TIME DATETIME                                    COMMENT '操作时间', 
+PRIMARY KEY (ID)
+)CHARSET=UTF8 COMMENT='日志表';
 	
 	
 
-	
+小程序:
+    一.成本预算:
+        1.前后台开发费用(90%,具体按功能多少和复杂程度而定);
+        2.服务器费用(运行服务器和数据库服务器:存储空间大小,访问量大小);
+        3.维护费(维护起止时间);
+        4.域名费用;
+        5.微信主体认证费用;
+
+
+    二.利润评估:
+        1.年运营费
+        单用户单请求10金币,兑换为10/100=0.1元,则
+
+
+    三.风险评估:
+
+
+    四.项目策划:
+        ***主要功能: 分类发送/返回信息, 消息推送, 微信登录, 扫码分享, 支付(充值兑换提现)
+		发问者如果属于问题对应类,则加分正常, 否则减半.
+		
+		
+        0.数据库设计(选用MySQL)
+		
+        1.架构设计,注意性能扩展,容量扩展和功能扩展.
+            	性能扩展: 在用户量达到一定量级后,单独部署反向代理服务器,同时增加应用服务器,采用负载均衡分担访问压力;
+            	容量扩展: 在存储图片服务器达到一定量级后,采用横向扩容机制扩容;
+            	功能扩展: 在功能需要增加时,可随时增加,采用分布式;
+            	可靠性: 部署集群;
+
+        2.小程序开发设计需求文档
+        3.产品原型设计
+        4.UI设计
+        5.前台开发
+        6.后台开发
+        7.服务器部署(小程序应用直接发布到微信服务器端, 前期使用两台云服务器:一台用于部署小程序服务, 一台用于部署数据库)
+        8.产品测试
+        9.产品修改
+        10.正式上线	

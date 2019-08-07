@@ -14,41 +14,43 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 /**
- * 角色实体类
+ * 问题实体类
  * 
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-
 @Data
 @Entity
-@Table(name = "MACO_ROLE")
-public class MacoRole implements Serializable {
+@Table(name = "QA_QUESTION")
+public class QaQuestion implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
-	@Id  
+	
+	// 主键
+	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid")
 	@GeneratedValue(generator = "idGenerator")
 	@Column(name = "ID", nullable = false, unique = true)
 	private String id;
-
-	@Column(name = "ROLE_NAME")
-	private String roleName;
-
-	@Column(name = "PID")
-	private String pid;
 	
-	@Column(name = "CLASSES")
-	private Integer classes;
+	// 问题文字描述
+	@Column(name = "QUESTION")
+	private String question;
 	
-	@Column(name = "IS_STOP")
-	private Integer isStop;
-
+	// 问题辅助描述图片路径
+	@Column(name = "QUESTION_PIC")
+	private String questionPic;
+	
+	// 提问者
+	@Column(name = "USER_ID")
+	private String userId;
+	
+	// 创建时间
 	@Column(name = "CREATE_TIME")
 	private Date createTime;
-
+	
+	// 更新时间
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
-
+	
 }

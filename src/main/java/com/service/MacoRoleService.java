@@ -2,7 +2,7 @@ package com.service;
 
 import java.util.List;
 
-import com.domain.MacoRole;
+import com.domain.QaRole;
 
 /**
  * 服务层接口
@@ -12,14 +12,14 @@ import com.domain.MacoRole;
  */
 public interface MacoRoleService {
 	
-	MacoRole getOne(String id);
+	QaRole getOne(String id);
 	
-	List<MacoRole> findTree();
+	List<QaRole> findTree();
 	
-	MacoRole save(MacoRole macoRole);
+	QaRole save(QaRole macoRole);
 	
 	void delete(String id);
 	
-	void update(MacoRole newMacoRole);
+	void update(QaRole newMacoRole);
 	
 }

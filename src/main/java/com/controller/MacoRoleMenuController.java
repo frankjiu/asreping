@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.domain.MacoRoleMenu;
+import com.domain.QaRoleMenu;
 import com.service.MacoRoleMenuService;
 import com.utils.LogAssist;
 import com.utils.LogOperation;
@@ -46,7 +46,7 @@ public class MacoRoleMenuController {
 	public String getOne(String id) {
 		JSONObject js = new JSONObject();
 		try {
-			MacoRoleMenu macoRoleMenu = macoRoleMenuService.getOne(id);
+			QaRoleMenu macoRoleMenu = macoRoleMenuService.getOne(id);
 			js.put("data", macoRoleMenu);
 			js.put("flag", true);
 			js.put("msg", "success");
@@ -64,10 +64,10 @@ public class MacoRoleMenuController {
 	@RequestMapping("/getBy")
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_QUERY, operationModule = LogOperation.WP_SYSTEM, describe = "角色菜单--条件查询")
-	public String getBy(MacoRoleMenu query) {
+	public String getBy(QaRoleMenu query) {
 		JSONObject js = new JSONObject();
 		try {
-			List<MacoRoleMenu> list = macoRoleMenuService.getByRoleId(query.getRoleId());
+			List<QaRoleMenu> list = macoRoleMenuService.getByRoleId(query.getRoleId());
 			js.put("data", list);
 			js.put("flag", true);
 			js.put("msg", "success");

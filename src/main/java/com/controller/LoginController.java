@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.domain.MacoRole;
-import com.domain.MacoRoleMenu;
-import com.domain.MacoUser;
-import com.domain.MacoUserRole;
+import com.domain.QaRole;
+import com.domain.QaRoleMenu;
+import com.domain.QaUser;
+import com.domain.QaUserRole;
 import com.service.MacoMenuService;
 import com.service.MacoRoleMenuService;
 import com.service.MacoRoleService;
@@ -65,15 +65,15 @@ public class LoginController {
 	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
 	@ResponseBody
 	@LogAssist(operationType = LogOperation.OP_LOGIN, operationModule = LogOperation.WP_SYSTEM, describe = "登录系统")
-	public String checkLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, MacoUser macoUser, String menuRootId) {
+	public String checkLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, QaUser macoUser, String menuRootId) {
 		// 获取session值使用false, 有就返回值, 否则返回null
 		String innerCode = (String) request.getSession().getAttribute("imgCode");
 		JSONObject js = new JSONObject();
 		try {
 			//密码加密
 			macoUser.setPassWord(MD5Helper.encode(macoUser.getPassWord()));
-			List<MacoUser> userList = macoUserService.findByLoginNameAndPassWord(macoUser);
-			MacoUser loginUser = null;
+			List<QaUser> userList = macoUserService.findByLoginNameAndPassWord(macoUser);
+			QaUser loginUser = null;
 			if (userList != null && userList.size() > 0) {
 				loginUser = userList.get(0);
 				loginUser.setCode(macoUser.getCode());
@@ -98,21 +98,21 @@ public class LoginController {
 				js.put("code", 200);
 				js.put("flag", true);
 				js.put("msg", "登录成功!");
-				MacoUser user = loginUser;
+				QaUser user = loginUser;
 				// 将登录用户信息存入session
 				// 用户ID
 				session.setAttribute(Constants.SESSION_LOGIN_ID, user.getId());
 				// 用户账号
 				session.setAttribute(Constants.SESSION_LOGIN_NAME, user.getLoginName());
 				// 用户角色
-				MacoUserRole userRole = new MacoUserRole();
-				List<MacoUserRole> list = macoUserRoleService.findByUserId(user.getId());
+				QaUserRole userRole = new QaUserRole();
+				List<QaUserRole> list = macoUserRoleService.findByUserId(user.getId());
 				if (list != null && list.size() > 0 ) userRole = list.get(0);
-				MacoRole role = macoRoleService.getOne(userRole.getRoleId());
+				QaRole role = macoRoleService.getOne(userRole.getRoleId());
 				session.setAttribute(Constants.SESSION_LOGIN_ROLE_ID, role.getId());
 				session.setAttribute(Constants.SESSION_LOGIN_ROLE, role.getRoleName());
 				// 用户权限(用户角色--拥有的菜单ids: 根据用户角色ID查询菜单ID)
-				List<MacoRoleMenu> roleMenuList = macoRoleMenuService.getByRoleId(role.getId());
+				List<QaRoleMenu> roleMenuList = macoRoleMenuService.getByRoleId(role.getId());
 				List<String> menuIdList = new ArrayList<String>();
 				
 				if (roleMenuList != null && roleMenuList.size() > 0) {

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.domain.MacoRoleMenu;
+import com.domain.QaRoleMenu;
 import com.repository.MacoRoleMenuRepository;
 import com.service.MacoRoleMenuService;
 import com.utils.ArrayToDbString;
@@ -37,8 +37,8 @@ public class MacoRoleMenuServiceImpl implements MacoRoleMenuService {
 	 * 主键查询
 	 */
 	@Override
-	public MacoRoleMenu getOne(String id) {
-		MacoRoleMenu macoRoleMenu = macoRoleMenuRepository.getOne(id);
+	public QaRoleMenu getOne(String id) {
+		QaRoleMenu macoRoleMenu = macoRoleMenuRepository.getOne(id);
 		return macoRoleMenu;
 	}
 	
@@ -46,8 +46,8 @@ public class MacoRoleMenuServiceImpl implements MacoRoleMenuService {
 	 * 条件查询
 	 */
 	@Override
-	public List<MacoRoleMenu> getByRoleId(String id) {
-		List<MacoRoleMenu> MacoRoleMenu = macoRoleMenuRepository.getByRoleId(id);
+	public List<QaRoleMenu> getByRoleId(String id) {
+		List<QaRoleMenu> MacoRoleMenu = macoRoleMenuRepository.getByRoleId(id);
 		return MacoRoleMenu;
 	}
 	
@@ -61,7 +61,7 @@ public class MacoRoleMenuServiceImpl implements MacoRoleMenuService {
 		List<String> list = new ArrayList<String>();
 		if (menu_ids != null && menu_ids.length > 0) {
 			for (int i = 0; i < menu_ids.length; i++) {
-				MacoRoleMenu macoRoleMenu = new MacoRoleMenu();
+				QaRoleMenu macoRoleMenu = new QaRoleMenu();
 				macoRoleMenu.setRoleId(role_id);
 				macoRoleMenu.setMenuId(menu_ids[i]);
 				macoRoleMenu.setCreateTime(new Date());

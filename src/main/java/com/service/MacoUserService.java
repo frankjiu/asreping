@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.domain.MacoUser;
+import com.domain.QaUser;
 
 /**
  * 服务层接口
@@ -17,19 +17,19 @@ import com.domain.MacoUser;
  */
 public interface MacoUserService {
 	
-	MacoUser getOne(String id);
+	QaUser getOne(String id);
 
-	List<MacoUser> findByUserName(String userName);
+	List<QaUser> findByUserName(String userName);
 
-	List<MacoUser> findByLoginNameAndPassWord(MacoUser macoUser);
+	List<QaUser> findByLoginNameAndPassWord(QaUser macoUser);
 	
-	MacoUser save(MacoUser macoUser);
+	QaUser save(QaUser macoUser);
 
 	void delete(String id);
 
-	void update(MacoUser newMacoUser);
+	void update(QaUser newMacoUser);
 
-	Integer count(MacoUser query);
+	Integer count(QaUser query);
 
 	//List<MacoUser> findPage(MacoUser macoUser, PageUtil page);
 	Page<Map<String,Object>> findPage(String loginName, Date createTimeBefore, Date createTimeAfter, Pageable pageable);

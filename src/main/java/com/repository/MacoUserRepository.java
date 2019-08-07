@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.domain.MacoUser;
+import com.domain.QaUser;
 
 /**
  * 服务层接口
@@ -21,7 +21,7 @@ import com.domain.MacoUser;
  * @author: Frankjiu
  * @date: 2018年4月6日 下午8:00:49
  */
-public interface MacoUserRepository extends JpaRepository<MacoUser, String>, JpaSpecificationExecutor<MacoUser> {
+public interface MacoUserRepository extends JpaRepository<QaUser, String>, JpaSpecificationExecutor<QaUser> {
 
 	/**
 	 *  根据登录名查询用户
@@ -29,7 +29,7 @@ public interface MacoUserRepository extends JpaRepository<MacoUser, String>, Jpa
 	 * @return
 	 */
 	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName ", nativeQuery = true)
-    List<MacoUser> findByUserName(@Param("loginName") String loginName);
+    List<QaUser> findByUserName(@Param("loginName") String loginName);
 	
 	/**
 	 *  根据登录名和密码查询用户
@@ -38,7 +38,7 @@ public interface MacoUserRepository extends JpaRepository<MacoUser, String>, Jpa
 	 * @return
 	 */
 	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName and u.login_password=:password ", nativeQuery = true)
-	List<MacoUser> findByLoginNameAndPassWord(@Param("loginName") String loginName, @Param("password") String password);
+	List<QaUser> findByLoginNameAndPassWord(@Param("loginName") String loginName, @Param("password") String password);
 	
 	/**
 	 *  根据登录名和(非)ID查询用户
@@ -47,7 +47,7 @@ public interface MacoUserRepository extends JpaRepository<MacoUser, String>, Jpa
 	 * @return
 	 */
 	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName and u.id<>:id ", nativeQuery = true)
-	List<MacoUser> findByNameAndId(@Param("loginName") String loginName, @Param("id") Integer id);
+	List<QaUser> findByNameAndId(@Param("loginName") String loginName, @Param("id") Integer id);
 	
 	/**
 	 *  根据ID删除用户
@@ -62,7 +62,7 @@ public interface MacoUserRepository extends JpaRepository<MacoUser, String>, Jpa
 	 * 根据干警查询其是否有设置账户
 	 */
 	@Query(value = " SELECT u.* FROM login_user u LEFT JOIN police_info p ON u.police_id = p.id WHERE p.id=:id ", nativeQuery = true)
-	List<MacoUser> findUserByPoliceId(@Param("id") Integer id);
+	List<QaUser> findUserByPoliceId(@Param("id") Integer id);
 	
 	/**
 	 *  分页查询

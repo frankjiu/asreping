@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.domain.MacoRoleMenu;
+import com.domain.QaRoleMenu;
 
 /**
  * 服务层接口
@@ -14,9 +14,9 @@ import com.domain.MacoRoleMenu;
  */
 public interface MacoRoleMenuService {
 	
-	MacoRoleMenu getOne(String id);
+	QaRoleMenu getOne(String id);
 	
-	List<MacoRoleMenu> getByRoleId(String id);
+	List<QaRoleMenu> getByRoleId(String id);
 	
 	boolean save(String role_id, @RequestParam(value = "menu_ids[]") String[] menu_ids);
 	

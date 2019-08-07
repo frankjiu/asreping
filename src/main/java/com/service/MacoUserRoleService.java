@@ -2,7 +2,7 @@ package com.service;
 
 import java.util.List;
 
-import com.domain.MacoUserRole;
+import com.domain.QaUserRole;
 
 /**
  * 服务层接口
@@ -12,14 +12,14 @@ import com.domain.MacoUserRole;
  */
 public interface MacoUserRoleService {
 
-	MacoUserRole getOne(String id);
+	QaUserRole getOne(String id);
 
-	List<MacoUserRole> findByUserId(String id);
+	List<QaUserRole> findByUserId(String id);
 
-	MacoUserRole save(MacoUserRole macoUserRole);
+	QaUserRole save(QaUserRole macoUserRole);
 
 	void delete(String id);
 
-	void update(MacoUserRole newMacoUserRole);
+	void update(QaUserRole newMacoUserRole);
 
 }
