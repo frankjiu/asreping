@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>MACO系统--主页</title>
+<title>QA系统--主页</title>
 <link href ="/img/m_icon.png" rel="shortcut icon">
 <link rel="stylesheet" href="/css/reset.css" type="text/css">
 <link rel="stylesheet" href="/ztree/resources/icomoon_styles.css" type="text/css">
@@ -32,13 +31,16 @@
 <body>
 	<div class="wrap_container">
 		<!-- 页面头部  -->
-		<%@ include file="/jsp/top.jsp" %>
+		<!-- <%@ include file="/jsp/top.jsp" %>  -->
+		
+		<!-- 引入头部head.html -->
+		<div th:include="header :: copy"></div>
 		
 		<!-- 页面头部下面内容区域 -->
 		<div class="wrap_content">
 			<!-- 左侧主页 -->
 			<div class="left_sider">
-				<h3 class="page_title">MACO系统主页</h3>
+				<h3 class="page_title">QA系统主页</h3>
 				<div><a href="/toTest">测试项目登录</a></div>
 				<div class="menu">
 					<div id="ztree_root_Id" class="ztree"></div>
@@ -48,24 +50,8 @@
 			<div class="right-sider">
 				<div class="forms-content">
 					
-					<!--效果html开始-->
-					<div id="LoopDiv">
-						<input id="S_Num" type="hidden" value="8" />
-						<div id="starsIF" class="imageflow">
-							<img src="/front-photo-effect/images/1.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/2.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/1.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/3.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/4.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/5.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/6.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/1.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/2.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/3.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/4.jpg" onclick="turnLarge(this)" alt="" />
-							<img src="/front-photo-effect/images/5.jpg" onclick="turnLarge(this)" alt="" />
-						</div>
-					</div>
+					
+					
 					<!--效果html结束-->
 					<div id="large_image"></div>
 					<div class="clear"></div>
@@ -126,7 +112,7 @@
 					if (data.flag) {
 						$.myToast("目录获取成功!");
 					} else {
-						$.myAlert("目录获取失败!");
+						//$.myAlert("目录获取失败!");
 					}
 
 					var pArray = data.data;

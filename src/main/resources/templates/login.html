@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <title>登录</title>
-<meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
-<meta name="author" content="Vincent Garreau" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href ="/img/m_icon.png" rel="shortcut icon">
 <link rel="stylesheet" media="screen" href="/css/style.css">
 <link rel="stylesheet" type="text/css" href="/css/reset.css" />
@@ -26,7 +23,7 @@
 						<img src="/img/name.png" />
 					</div>
 					<div class="login-center-input">
-						<input type="text" name="login_name" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" />
+						<input type="text" name="loginName" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" />
 						<div class="login-center-input-text">用户名</div>
 					</div>
 				</div>
@@ -35,7 +32,7 @@
 						<img src="/img/password.png" />
 					</div>
 					<div class="login-center-input">
-						<input type="password" name="pass_word" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />
+						<input type="password" name="passWord" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />
 						<div class="login-center-input-text">密码</div>
 					</div>
 				</div>
@@ -82,6 +79,9 @@
 				dataType : 'json',
 				async : false,
 				success : function(js) {
+					// json字符串转json对象
+					js = JSON.parse(js);
+					
 					if (js.code == 4001) {
 						$("#loginErrorMsg").html(js.msg);
 					} else if (js.code == 4002) {
@@ -99,8 +99,8 @@
 							removeClass(document.querySelector(".sk-rotating-plane"), "active")
 							document.querySelector(".login").style.display = "block"
 							$.myToast("登录成功!")
-							window.location.href = '/main';
-						}, 3000)
+							window.location.href = '/mainPage';
+						}, 1000)
 						
 						//window.location.href = "/main";
 						
@@ -115,8 +115,8 @@
 							removeClass(document.querySelector(".sk-rotating-plane"), "active")
 							document.querySelector(".login").style.display = "block"
 							$.myAlert("登录失败!")
-							window.location.href = '/login';
-						}, 3000)
+							window.location.href = '/loginPage';
+						}, 1000)
 						
 						//window.location.href = "/login";
 					}

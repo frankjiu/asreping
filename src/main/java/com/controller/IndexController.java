@@ -18,23 +18,34 @@ import com.utils.LogOperation;
 public class IndexController {
 	
 	/**
+	 * 索引登录页
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@LogAssist(operationType = LogOperation.OP_GOTO, operationModule = LogOperation.WP_SYSTEM, describe = "索引登录页")
+	public String indexLogin() {
+		return "login";
+	}
+	
+	/**
 	 * 跳转登录页
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	@LogAssist(operationType = LogOperation.OP_GOTO, operationModule = LogOperation.WP_SYSTEM, describe = "跳转登录页")
 	public String toLogin() {
-		return "/login";
+		return "login";
 	}
 	
 	/**
 	 * 跳转到主页
 	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/mainPage", method = RequestMethod.GET)
 	@LogAssist(operationType = LogOperation.OP_GOTO, operationModule = LogOperation.WP_SYSTEM, describe = "跳转到主页")
 	public String toMain() {
-		return "/main";
+		return "main";
 	}
 	
 	/**

@@ -108,26 +108,29 @@ public class LoginController {
 				QaUserRole userRole = new QaUserRole();
 				List<QaUserRole> list = qaUserRoleService.findByUserId(user.getId());
 				if (list != null && list.size() > 0 ) userRole = list.get(0);
-				QaRole role = qaRoleService.getOne(userRole.getRoleId());
-				session.setAttribute(Constants.SESSION_LOGIN_ROLE_ID, role.getId());
-				session.setAttribute(Constants.SESSION_LOGIN_ROLE, role.getRoleName());
-				// 用户权限(用户角色--拥有的菜单ids: 根据用户角色ID查询菜单ID)
-				List<QaRoleMenu> roleMenuList = qaRoleMenuService.getByRoleId(role.getId());
-				List<String> menuIdList = new ArrayList<String>();
 				
-				if (roleMenuList != null && roleMenuList.size() > 0) {
-					for (int i = 0; i < roleMenuList.size(); i++) {
-						String menu_id = roleMenuList.get(i).getMenuId();
-						menuIdList.add(menu_id);
+				if (userRole.getRoleId() != null) {
+					QaRole role = qaRoleService.getOne(userRole.getRoleId());
+					session.setAttribute(Constants.SESSION_LOGIN_ROLE_ID, role.getId());
+					session.setAttribute(Constants.SESSION_LOGIN_ROLE, role.getRoleName());
+					// 用户权限(用户角色--拥有的菜单ids: 根据用户角色ID查询菜单ID)
+					List<QaRoleMenu> roleMenuList = qaRoleMenuService.getByRoleId(role.getId());
+					List<String> menuIdList = new ArrayList<String>();
+					
+					if (roleMenuList != null && roleMenuList.size() > 0) {
+						for (int i = 0; i < roleMenuList.size(); i++) {
+							String menu_id = roleMenuList.get(i).getMenuId();
+							menuIdList.add(menu_id);
+						}
 					}
+					session.setAttribute(Constants.SESSION_MENU_LIST, menuIdList);
+					// String[] menuIdArray = (String[]) menuIdList.toArray();
+					// 集合转数组
+					String[] menuIdArray= (String[]) menuIdList.toArray(new String[menuIdList.size()]);
+					
+					session.setAttribute(Constants.SESSION_MENU_IDS_ARRAY, menuIdArray);
 				}
-				session.setAttribute(Constants.SESSION_MENU_LIST, menuIdList);
 				
-				// String[] menuIdArray = (String[]) menuIdList.toArray();
-				// 集合转数组
-				String[] menuIdArray= (String[]) menuIdList.toArray(new String[menuIdList.size()]);
-				
-				session.setAttribute(Constants.SESSION_MENU_IDS_ARRAY, menuIdArray);
 				// 更新用户登录时间
 				user.setLoginTime(new Date());
 				qaUserService.update(user);

@@ -28,7 +28,7 @@ public interface QaUserRepository extends JpaRepository<QaUser, String>, JpaSpec
 	 * @param loginName
 	 * @return
 	 */
-	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName ", nativeQuery = true)
+	@Query(value = " SELECT * FROM qa_user u WHERE u.login_name=:loginName ", nativeQuery = true)
     List<QaUser> findByUserName(@Param("loginName") String loginName);
 	
 	/**
@@ -37,7 +37,7 @@ public interface QaUserRepository extends JpaRepository<QaUser, String>, JpaSpec
 	 * @param password
 	 * @return
 	 */
-	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName and u.login_password=:password ", nativeQuery = true)
+	@Query(value = " SELECT * FROM qa_user u WHERE u.login_name=:loginName and u.pass_word=:password ", nativeQuery = true)
 	List<QaUser> findByLoginNameAndPassWord(@Param("loginName") String loginName, @Param("password") String password);
 	
 	/**
@@ -46,7 +46,7 @@ public interface QaUserRepository extends JpaRepository<QaUser, String>, JpaSpec
 	 * @param id
 	 * @return
 	 */
-	@Query(value = " SELECT * FROM login_user u WHERE u.login_name=:loginName and u.id<>:id ", nativeQuery = true)
+	@Query(value = " SELECT * FROM qa_user u WHERE u.login_name=:loginName and u.id<>:id ", nativeQuery = true)
 	List<QaUser> findByNameAndId(@Param("loginName") String loginName, @Param("id") Integer id);
 	
 	/**
@@ -55,13 +55,13 @@ public interface QaUserRepository extends JpaRepository<QaUser, String>, JpaSpec
 	 */
 	@Transactional 
 	@Modifying 
-	@Query(value = " DELETE FROM login_user WHERE id=:id ", nativeQuery = true)
+	@Query(value = " DELETE FROM qa_user WHERE id=:id ", nativeQuery = true)
 	void deleteByNativeId(@Param("id") Integer id);
 	
 	/**
 	 * 根据干警查询其是否有设置账户
 	 */
-	@Query(value = " SELECT u.* FROM login_user u LEFT JOIN police_info p ON u.police_id = p.id WHERE p.id=:id ", nativeQuery = true)
+	@Query(value = " SELECT u.* FROM qa_user u LEFT JOIN police_info p ON u.police_id = p.id WHERE p.id=:id ", nativeQuery = true)
 	List<QaUser> findUserByPoliceId(@Param("id") Integer id);
 	
 	/**
@@ -72,11 +72,11 @@ public interface QaUserRepository extends JpaRepository<QaUser, String>, JpaSpec
 	 * @param pageable
 	 * @return
 	 */
-	@Query(value = " select u.*, p.`name` policeName from login_user u "
+	@Query(value = " select u.*, p.`name` policeName from qa_user u "
 			+ " LEFT JOIN police_info p ON u.police_id = p.id "
 			+ " where if(?1 !='', u.login_name like ?1,1=1) and if(?2 !='', u.create_time>=?2,1=1) and if(?3 !='', u.create_time<=?3,1=1) "
 			+ " order by u.update_time desc, u.create_time desc ", 
-			countQuery = " select count(*) from login_user u "
+			countQuery = " select count(*) from qa_user u "
 			+ " LEFT JOIN police_info p ON u.police_id = p.id "
 			+ " where if(?1 !='', u.login_name like ?1,1=1) and if(?2 !='', u.create_time>=?2,1=1) and if(?3 !='', u.create_time<=?3,1=1) "
 			+ " order by u.update_time desc, u.create_time desc ",

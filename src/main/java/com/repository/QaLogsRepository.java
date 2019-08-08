@@ -22,11 +22,11 @@ public interface QaLogsRepository extends JpaRepository<QaLogs, String>, JpaSpec
 	
 	List<QaLogs> findByUserId(String userId);
 	
-	@Query(value = " select u.*, p.`name` policeName from login_user u "
+	@Query(value = " select u.*, p.`name` policeName from qa_user u "
 			+ " LEFT JOIN police_info p ON u.police_id = p.id "
 			+ " where if(?1 !='', u.login_name like ?1,1=1) and if(?2 !='', u.create_time>=?2,1=1) and if(?3 !='', u.create_time<=?3,1=1) "
 			+ " order by u.update_time desc, u.create_time desc ", 
-			countQuery = " select count(*) from login_user u "
+			countQuery = " select count(*) from qa_user u "
 			+ " LEFT JOIN police_info p ON u.police_id = p.id "
 			+ " where if(?1 !='', u.login_name like ?1,1=1) and if(?2 !='', u.create_time>=?2,1=1) and if(?3 !='', u.create_time<=?3,1=1) "
 			+ " order by u.update_time desc, u.create_time desc ",
