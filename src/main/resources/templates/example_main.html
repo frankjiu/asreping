@@ -11,17 +11,12 @@
 
 <body>
     <div class="wrapper-container">
-		<h3>QA系统主页</h3>
-		<!-- 引入头部head.html -->
-		<div th:include="header :: copy"></div>
-		
         <fieldset class="layelem-field">
-            <legend>开启树形菜单节点操作图标</legend>
+            <legend>开启树形菜单</legend>
         </fieldset>
-        <div id="tree"></div>
+        <div id="tree" class="tree"></div>
     </div>
-    <script type="text/javascript" src="@{module/js/tree.js}"></script>
-		
-	
+    <script type="text/javascript" src="js/scrollbar.js"></script>
+    <script type="text/javascript" src="js/tree.js"></script>
 </body>
 </html>
