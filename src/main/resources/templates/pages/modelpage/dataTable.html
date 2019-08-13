@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+    <fieldset class="layelem-field">
+        <legend>数据表格</legend>
+    </fieldset>
+    <div class="lay-tableView">
+        <div class="lay-table">
+            <div class="table-header">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <th data-filed="0">
+                            <div class="table-cell table-cell-0">
+                                <div class="lay-checkbox">
+                                    <i class="fa fa-square-o"></i>
+                                </div>
+                            </div>
+                        </th>
+                        <th data-filed="id">
+                            <div class="table-cell table-cell-2">
+                                <span>ID</span>
+                            </div>
+                        </th>
+                        <th data-filed="username">
+                            <div class="table-cell table-cell-2">
+                                <span>用户名</span>
+                            </div>
+                        </th>
+                        <th data-filed="email">
+                            <div class="table-cell table-cell-4">
+                                <span>邮箱</span>
+                            </div>
+                        </th>
+                        <th data-filed="sex">
+                            <div class="table-cell table-cell-1">
+                                <span>性别</span>
+                            </div>
+                        </th>
+                        <th data-filed="city">
+                            <div class="table-cell table-cell-2">
+                                <span>城市</span>
+                            </div>
+                        </th>
+                        <th data-filed="sign">
+                            <div class="table-cell table-cell-12">
+                                <span>签名</span>
+                            </div>
+                        </th>
+                        <th data-filed="ip">
+                            <div class="table-cell table-cell-2">
+                                <span>IP</span>
+                            </div>
+                        </th>
+                        <th data-filed="joinTime">
+                            <div class="table-cell table-cell-2">
+                                <span>加入时间</span>
+                            </div>
+                        </th>
+                        <th data-filed="operating">
+                            <div class="table-cell table-cell-3">
+                                <span>操作</span>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div id="table_container" class="table-body" data-url="dataTable.json">
+            </div>
+        </div>
+        <div class="table-page">
+            <div class="layPage">
+                <a class="fa fa-angle-left lay-prevPage" href="javascript:void(0);"></a>
+                <div class="numPage">
+                    <a class="curPage" href="javascript:void(0);">1</a>
+                    <a href="javascript:void(0);">2</a>
+                    <a href="javascript:void(0);">3</a>
+                    <a class="laypage-spr" href="javascript:void(0);">...</a>
+                    <a class="laypage-last" href="javascript:void(0);">10</a>
+                </div>
+                <a class="fa fa-angle-right lay-nextPage" href="javascript:void(0);"></a>
+            </div>
+            <span class="laypage-skip">
+                到第<input class="pageNumber" type="text" min="1" value="1">页
+                <button type="button" class="laypage-btn">确定</button>
+            </span>
+            <span class="laypage-count">共 10 页</span>
+            <span class="laypage-limits">
+                <select>
+                    <option value="10" selected>10条/页</option>
+                    <option value="20">20条/页</option>
+                    <option value="30">30条/页</option>
+                    <option value="40">40条/页</option>
+                    <option value="50">50条/页</option>
+                    <option value="60">60条/页</option>
+                </select>
+            </span>
+        </div>
+    </div>
+    <script type="text/javascript" src="module/js/dataTable.js"></script>
+</body>
+</html>
