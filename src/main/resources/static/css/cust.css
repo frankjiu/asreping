@@ -504,9 +504,11 @@
 }
 
 .vertical-navbar{
-    width: 200px;
+    width: 100%;
     background-color: #383d4e;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 .vertical-navbar li{
     display: block;
@@ -810,102 +812,89 @@
     font-size: 20px;
     font-weight: 300;
 }
-#tree{
-    width: 200px;
+
+/**--树形菜单--**/
+.tree{
+    width: 220px;
     height: 95%;
     border: 1px solid #e6e6e6;
+    position: relative;
+    left: 0;
+    top: 0;
+    overflow: auto;
+}
+.tree .menuTree{
+    width: 100%;
     padding: 10px;
     position: absolute;
     left: 0;
-    top: 5%;
-    overflow: auto;
-}
-#tree .menuTree{
-    line-height: 24px;
-}
-.menuTree li.layitem{
-    width: 100%;
-    position: relative;
-}
-.menuTree li.layitem.layitem-sethide:before{
-    height: 0;
-}
-.menuTree li.layitem:before{
-    content: '';
-    position: absolute;
     top: 0;
-    left: -9px;
-    width: 0;
-    height: 100%;
-    border-left: 1px dotted #c0c4cc;
 }
-/*
-.menuTree li.layitem:after{
-    content: '';
-    position: absolute;
-    top: 9px;
-    left: -4px;
-    width: 18px;
-    height: 0;
-    border-top: 1px solid #e6e6e6;
+.menuTree ul li{
+    width: 100%;
+    padding-left: 24px;
 }
-*/
-.tree-entry {
-    position: relative;
+.tree-entry{
     padding: 3px 0;
-    height: 24px;
+    height: 32px;
     white-space: nowrap;
-}
-.tree-entry div{
-    display: inline-block;
-}
-.treeheader{
     cursor: pointer;
-    padding-right: 10px;
 }
-.treeheader * {
+.tree-entry .laytree-set{
     display: inline-block;
-    vertical-align: middle;
+    position: relative;
+    padding-left: 24px;
+    height: 32px;
 }
-.treeheader i{
-    height: 22px;
-    font-size: 18px;
-    line-height: 22px;
-    width: 22px;
-    text-align: center;
-}
-.treeheader a{
+.laytree-set span{
     display: inline-block;
-    vertical-align: middle;
-    color: #555;
-}
-
-/*.menuTree li div.treeheader i,
-.menuTree li div.endheader i{
-    line-height: 36px;
-    background-color: #fff;
-    position: relative;
-    margin-right: 6px;
-    z-index: 100;
-}
-.menuTree li div.treeheader i{
-    font-size: 24px;
-}
-.menuTree li div.endheader i{
     font-size: 18px;
-}
-.menuTree li div.endheader{
-    position: relative;
-}
-.menuTree li div.endheader:before{
-    content: '';
+    color: #999;
     position: absolute;
-    top: 10px;
-    left: -9px;
-    width: 30px;
-    height: 100%;
-    border-top: 1px dotted #c0c4cc;
-}*/
+    left: 2px;
+    top: 8px;
+}
+.laytree-set a{
+    display: block;
+    font-size: 15px;
+    line-height: 32px;
+    padding-right: 5px;
+    vertical-align: middle;
+    color: #333;
+    -webkit-transition: color .2s;
+    -ms-transition: color .2s;
+    transition: color .2s;
+}
+.laytree-set a:hover{
+    color: #999;
+}
+.laytree-set input.editInput{
+    display: inline-block;
+    width: 220px;
+    height: 24px;
+    background-color: #eee;
+    border-radius: 2px;
+    padding: 0 3px;
+    font-size: 13px;
+    line-height: 24px;
+    vertical-align: -5px;
+    color: #333;
+}
+.tree-entry .tree-btngroup{
+    display: inline-block;
+    visibility: hidden;
+}
+.tree-btngroup i{
+    display: inline-block;
+    margin-right: 3px;
+    color: #666;
+    -webkit-transition: color .2s;
+    -ms-transition: color .2s;
+    transition: color .2s;
+}
+.tree-btngroup i:hover{
+    color: #999;
+}
 
 /**-- 数据表格 --**/
 .lay-tableView{
@@ -917,8 +906,10 @@
 .lay-tableView .lay-table{
     position: relative;
     overflow: hidden;
+    overflow-x: auto;
     background-color: #fff;
     color: #666;
+    border-collapse: collapse;
 }
 .lay-table * {
     text-align: left;
@@ -929,16 +920,28 @@
 }
 .lay-table .table-header{
     background-color: #f2f2f2;
+}
+.lay-table .table-body{
+    min-width: 100%;
+    position: relative;
     overflow: hidden;
+    overflow-y: auto;
+    border-width: 0 1px 1px 1px;
+}
+.table-body table,.table-header table{
+    margin-right: -1px;
+    margin-bottom: -1px;
+    border-collapse: collapse;
 }
 .table-header table{
     position: relative;
     width: auto;
-    margin: 0;
-    margin-bottom: -1px;
 }
 .table-header table tr{
     background-color: #f2f2f2;
+}
+.table-header th{
+    border-width: 1px 1px 0 1px;
 }
 .lay-table th,.lay-table td{
     position: relative;
@@ -946,10 +949,16 @@
     min-height: 20px;
     line-height: 20px;
     font-size: 14px;
+}
+.table-header,
+.table-body,
+.lay-table th,
+.lay-table td{
     border-width: 1px;
     border-style: solid;
     border-color: #e6e6e6;
 }
+
 .table-cell{
     height: 28px;
     line-height: 28px;
@@ -979,6 +988,7 @@
 }
 .lay-table .laybtn{
     display: inline-block;
+    margin: 0 3px;
     padding: 0 10px;
     color: #fff;
     white-space: nowrap;
@@ -990,15 +1000,78 @@
     -webkit-transition: all .3s;
     transition: all .3s;
 }
-.lay-table .laybtn.edit{
-    background-color: #009688;
-}
-.lay-table .laybtn.delect{
-    background-color: #FF5722;
-}
 .lay-table .laybtn:hover{
     opacity: .8;
     filter: alpha(opacity = 80);
+}
+.table-page{
+    position: relative;
+    width: 100%;
+    padding: 7px 7px 0;
+    height: 41px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.table-page div,.lay-prevPage,.lay-nextPage,.table-page span,.laypage-btn,.layPage .numPage a{
+    float: left;
+    height: 26px;
+    font-size: 14px;
+}
+.lay-nextPage,.lay-prevPage,.layPage a,.laypage-count{
+    padding: 0 12px;
+}
+.lay-prevPage,.lay-nextPage{
+    font-size: 22px;
+    color: #999;
+}
+.lay-prevPage,.lay-nextPage,.laypage-count{
+    line-height: 26px;
+}
+.layPage .numPage a{
+    line-height: 26px;
+}
+.layPage .numPage a.curPage,
+.layPage .numPage a.curPage:hover{
+    background-color: #1AA094;
+    color: #fff;
+    border-radius: 3px;
+}
+.layPage .numPage a.laypage-spr,
+.layPage .numPage a.laypage-spr:hover{
+    color: #999;
+    cursor: text;
+}
+.layPage .numPage a:hover,.lay-prevPage:hover,.lay-nextPage:hover{
+    color: #1AA094;
+}
+.laypage-btn{
+    margin: 0 5px;
+    padding: 0 10px;
+    font-size: 15px;
+    line-height: 24px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.table-page span input.pageNumber{
+    display: inline-block;
+    width: 40px;
+    height: 26px;
+    font-size: 15px;
+    line-height: 24px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    margin: 0 10px;
+    padding: 0 3px;
+    text-align: center;
+}
+.laypage-limits select{
+    margin: 0 6px;
+    height: 26px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.laypage-limits select:focus{
+    outline: 1px solid #1AA094;
 }
 
 
@@ -1009,37 +1082,75 @@
     width: 80px;
 }
 .table-cell-2{
-    width: 120px;
-}
-.table-cell-3{
     width: 150px;
 }
+.table-cell-3{
+    width: 200px;
+}
 .table-cell-4{
-    width: 180px;
+    width: 240px;
 }
 .table-cell-5{
-    width: 210px;
+    width: 290px;
 }
 .table-cell-6{
-    width: 250px;
+    width: 310px;
 }
 .table-cell-7{
-    width: 280px;
-}
-.table-cell-8{
-    width: 320px;
-}
-.table-cell-9{
     width: 350px;
 }
+.table-cell-8{
+    width: 410px;
+}
+.table-cell-9{
+    width: 450px;
+}
 .table-cell-10{
-    width: 380px;
+    width: 500px;
 }
 .table-cell-11{
     width: 420px;
 }
 .table-cell-12{
     width: 460px;
+}
+
+/**-- 自定义滚动条 --**/
+.custScrollbar{
+    width: 300px;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #eee;
+    position: relative;
+    overflow: hidden;
+}
+.scrollbox{
+    width: 100%;
+    padding: 0 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#scrollTools{
+    width: 4px;
+    height: 100%;
+    background-color: #ccc;
+    overflow: hidden;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    opacity: .3;
+    filter: alpha(opacity = 30);
+    z-index: 100;
+}
+#scrollTools span{
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }
 
 /**-- 修改密码弹出层内容 --**/

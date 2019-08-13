@@ -21,7 +21,7 @@ $(function () {
 
     // 退出按钮点击事件监听
     $('.layout').click(function () {
-        window.location.href = 'login.html';
+        window.location.href = '/loginPage';
     });
 
     (function () {
@@ -33,15 +33,10 @@ $(function () {
         $('.menu-content').css({'height':winh - header - menutitle});
     })();
 
-    $('.menu-content').mCustomScrollbar();
-
     // 左侧菜单ajax请求数据
     AjaxData();
 
 });
-
-
-
 
 // 请求左侧菜单接口数据
 function AjaxData() {
@@ -57,7 +52,6 @@ function AjaxData() {
         }
     })
 }
-
 
 // 渲染左侧菜单
 function menuRender(data) {
@@ -87,6 +81,10 @@ function initPage() {
     }
     $('.vertical-navbar li.curnavbar').find('i').removeClass('fa-caret-down');
     $('.vertical-navbar li.curnavbar').find('i').addClass('fa-caret-up');
+
+    // 自定义左侧菜单滚动条
+    custScrollbar("leftMenu","scrollMenu",20);
+
     getPage();
 }
 
@@ -127,7 +125,6 @@ function selectIndex() {
         $(this).parent('li').addClass('curnavbar');
         $(this).find('i').addClass('fa-caret-up').removeClass('fa-caret-down');
     }
-
 }
 
 // 左侧菜单二级点击事件监听

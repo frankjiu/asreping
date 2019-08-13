@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+<div id="scrollbar" class="custScrollbar">
+    <ul id="scroll" class="scrollbox"></ul>
+</div>
+<script>
+    var ostr = '';
+    for(var i = 0; i < 100;i++){
+        ostr += '<li><h4>大幅度随风倒十分</h4><p>多福多寿犯得上发射点犯得上发士大夫士大夫</p></li>';
+    }
+    document.getElementById('scroll').innerHTML = ostr;
+    // 调用自定义滚动条插件
+    custScrollbar("scrollbar","scroll");
+</script>
+</body>
+</html>

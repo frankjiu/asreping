@@ -126,7 +126,8 @@
 }
 .menu-content{
     width: 100%;
-    height: auto;
+    position: relative;
+    overflow: hidden;
 }
 .menu-list{
     width: 100%;

@@ -12,9 +12,9 @@ $(function () {
     $('#user').blur(function () {
         $(this).parent().css({'borderColor':'#666'});
         var oValue = $(this).val(),
-            reg = /^[a-zA-Z0-9_]{8,}/g;
+            reg = /^[a-zA-Z0-9_]{6,}/g;
         if(!reg.test(oValue)){
-            $('.errorNotes').html('用户名错误，必须是8位以上字母、数字组成！');
+            $('.errorNotes').html('用户名错误，必须是6位以上字母、数字组成！');
             errorInfo();
         }
     });
@@ -22,9 +22,9 @@ $(function () {
     $('#psw').blur(function () {
         $(this).parent().css({'borderColor':'#666'});
         var oValue = $(this).val(),
-            reg = /^[a-zA-Z0-9_]{8,12}/g;
+            reg = /^[a-zA-Z0-9_]{6,}/g;
         if(!reg.test(oValue)){
-            $('.errorNotes').html('密码错误，必须是8-12位字母、数字、下划线组成！');
+            $('.errorNotes').html('密码错误，必须是6位字母、数字组成！');
             errorInfo();
         }
     });
@@ -64,7 +64,7 @@ function checkForm() {
     }else{
         $('.errorNotes').text('登录成功');
         errorInfo();
-        return window.location.href = 'jsp/template/main.html';
+        return window.location.href = '/mainPage';
     }
 
 }

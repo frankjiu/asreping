@@ -108,7 +108,7 @@ function laydate(options) {
     }
 
     // 将生成html结构添加至页面中
-    $('.fluid-container').append(laydate);
+    $(options.ele).parent().append(laydate);
     $('.laydate').append(laydateMain);
     $('.laydate-main').html(oheader+ocontent+ofooter);
     $('.laydate-content').append(otable);
