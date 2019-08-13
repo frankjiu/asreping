@@ -22,7 +22,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "MACO_LOGS")
+@Table(name = "Qa_LOGS")
 public class QaLogs implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

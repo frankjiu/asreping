@@ -1,43 +1,24 @@
 package com.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import lombok.Getter;
+import lombok.Setter;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import lombok.Data;
-
-@Data
-@Entity
 public class ResultVo {
 	
-	
-	@Id  
-	@GenericGenerator(name = "idGenerator", strategy = "uuid")
-	@GeneratedValue(generator = "idGenerator")
-	private Integer id;
-	
-	@Transient
+	@Setter
+	@Getter
 	private int count = 0;
 	
-	@Transient
+	@Setter
+	@Getter
 	private Object data = null;
 	
-	@Transient
+	@Setter
+	@Getter
 	private boolean flag = false;
 	
-	@Transient
+	@Setter
+	@Getter
 	private String msg = null;
-	
-	/*@Transient
-	private String code;
-	
-	@Transient
-	private String status = null;
-	
-	@Transient
-	private int row = 0;*/
 	
 }
