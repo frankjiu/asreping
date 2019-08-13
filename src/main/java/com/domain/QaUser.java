@@ -62,6 +62,10 @@ public class QaUser implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
+	// 用户角色类型 0:管理员/1:专家/2:普通/3:黑名单
+	@Column(name = "TYPE")
+	private Integer type;
+	
 	// 是否冻结 0:否/1:是
 	@Column(name = "IS_FREEZE")
 	private Integer isFreeze;

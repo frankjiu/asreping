@@ -33,7 +33,7 @@ public class QaRole implements Serializable {
 	@Column(name = "ID", nullable = false, unique = true)
 	private String id;
 
-	// 角色名称:普通用户/专家用户/管理员/黑名单
+	// 角色名称:管理员/专家用户/普通用户/黑名单
 	@Column(name = "ROLE_NAME")
 	private String roleName;
 

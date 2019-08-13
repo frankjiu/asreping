@@ -1,36 +1,77 @@
-﻿@charset "utf-8";
-/* CSS Document */
-/*Reset*/
-*{-webkit-box-sizing: box-sizing;box-sizing:content-box;}
-html,body{width: 100%;height: 100%;	overflow:hidden;}
-a:hover, a:focus{text-decoration:none;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
-table{border-collapse:collapse;border-spacing:0;}
-body{-webkit-text-size-adjust:none;}
-fieldset,img{border:0;}
-img{ vertical-align: top; max-width: 100%; }
-address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;}
-ol,ul{list-style:none;}
-caption,th{text-align:left;}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
-q:before,q:after{content:'';}
-abbr,acronym {border:0;}
-.clearfix:after{visibility:hidden;display: block;font-size:0;content:" ";clear:both;height:0;}
-* html .clearfix{ zoom: 1; } /* IE6 */
-*:first-child+html .clearfix { zoom: 1; } /* IE7 */
-.cli{ clear:both; font-size:0; height:0; overflow:hidden;display:block;}
-.lclear{clear:left;font-size:0;height:0;overflow:hidden;}	
-.fl{float:left;}
-.fr{float:right;}
-button{outline:none;border:none;background-color:transparent;}
-/* ֹ
-iframe{nifm2:expression(this.src='about:blank',this.outerHTML='');}
-script{no2js:expression((this.src.toLowerCase().indexOf('http')==0)?document.close():'');}
-*/
-/* ıԼ˶
-div{word-wrap: break-word;word-break: normal;}  
-p{text-align:justify; text-justify:inter-ideograph;}
-*/
-/*general*/
-body{font-size:12px;font-family:'微软雅黑',"宋体","Arial Narrow",Helvetica,sans-serif;color:#000;line-height:1.2;text-align:left;}
-a{/* color:#333; */text-decoration:none;}
+@charset "utf-8";
+*{
+    margin: 0;
+    padding: 0;
+    font-family: '微软雅黑';
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html,body,.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+ul,li{
+    list-style:none;
+}
+a{
+    text-decoration: none;
+    color: #1a1a1a;
+}
+input,button,textarea{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+button{
+    border-radius: 2px;
+    cursor: pointer;
+}
+table{
+    border-collapse: collapse;
+}
+table th,table td{
+    font-weight: normal;
+}
+textarea{
+    resize: vertical;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 24px;
+}
+textarea:hover,textarea:focus{
+    border-color: #ccc;
+}
+button:hover{
+    opacity: .8;
+    filter: alpha(opacity = 80);
+}
+
+/**-- 错误提示框内容 --**/
+.errorNotes{
+    max-width: 300px;
+    background-color: #333;
+    background-color: rgba(0,0,0,.7);
+    border-radius: 4px;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: #cbcbcb;
+    position: fixed;
+    top: 150px;
+    left: 200px;
+    z-index: 100;
+    display: none;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    -wekbit-transform: scale(.5);
+    transform: scale(.5);
+}

@@ -10,6 +10,8 @@ WECHAT VARCHAR(50)          					COMMENT '微信号' 								 ,
 
 ID_CARD VARCHAR(18)         					COMMENT '身份证号' 							     ,
 EMAIL VARCHAR(50)           					COMMENT '电子邮箱' 							     ,
+
+TYPE INT(1) DEFAULT 2 							COMMENT '用户角色类型 0:管理员/1:专家/2:普通/3:黑名单',
 IS_FREEZE INT(1)            					COMMENT '是否冻结 0:否/1:是'   				 	 ,
 
 SUBJECT_ID VARCHAR(32)              			COMMENT '专业学科ID'  						     ,
