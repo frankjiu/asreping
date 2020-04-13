@@ -22,7 +22,7 @@ public enum ApiResponseEnum {
 		return errCode;
 	}
 
-	public void setErrCode(int errCode) {
+	private void setErrCode(int errCode) {
 		this.errCode = errCode;
 	}
 
@@ -30,7 +30,7 @@ public enum ApiResponseEnum {
 		return errMsg;
 	}
 
-	public void setErrMsg(String errMsg) {
+	private void setErrMsg(String errMsg) {
 		this.errMsg = errMsg;
 	}
 }

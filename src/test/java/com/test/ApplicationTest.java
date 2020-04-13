@@ -11,7 +11,8 @@ public class ApplicationTest {
 
 	@Test
 	public void contextLoads() {
-		System.out.println("......");
+		int a = 0 % 10;
+		System.out.println("......" + a);
 	}
 
 }

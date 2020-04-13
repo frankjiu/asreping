@@ -10,7 +10,7 @@ public final class Constants {
 
 	// 避免实例化
 	private Constants() {
-	};
+	}
 
 	// 登录用户主键ID
 	public static final String SESSION_LOGIN_ID = "_SESSION_LOGIN_ID";
@@ -20,16 +20,16 @@ public final class Constants {
 
 	// 用户角色主键ID
 	public static final String SESSION_LOGIN_ROLE_ID = "_SESSION_LOGIN_ROLE_ID";
-	
+
 	// 普通用户角色主键ID
 	public static final String CommonRoleId = "12412fsdfsf323sddddfsf534";
-	
+
 	// 用户角色名称
 	public static final String SESSION_LOGIN_ROLE = "_SESSION_LOGIN_ROLE";
 
 	// 用户菜单权限集合
 	public static final String SESSION_MENU_LIST = "_SESSION_MENU_LIST";
-	
+
 	// 用户菜单权限数组--菜单主键ID数组
 	public static final String SESSION_MENU_IDS_ARRAY = "_SESSION_MENU_IDS_ARRAY";
 
@@ -46,10 +46,10 @@ public final class Constants {
 		public static final int ROLE_TYPE_C = 2;
 		public static final int ROLE_TYPE_D = 3;
 	}
-	
+
 	// 队列消息名称
 	public static final String QUEUE_DESTINATION = "QUEUE_DESTINATION";
-	
+
 	// 话题消息名称
 	public static final String TOPIC_NAME = "ACTIVE_MQ_TOPIC_SPE";
 
